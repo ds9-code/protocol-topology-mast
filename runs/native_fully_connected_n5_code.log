@@ -1,0 +1,11 @@
+!! RPD-banning gpt-4.1-mini, trying next fallback
+Trial 1/5 done in 118.7s success=True fc1=0 fc2=0 fc3=0 ids=[]
+!! gpt-4o still RPM-limited after retries, trying next
+!! RPD-banning gpt-4o, trying next fallback
+Trial 2/5 done in 92.0s success=True fc1=0 fc2=0 fc3=0 ids=[]
+Trial 3/5 done in 128.2s success=True fc1=0 fc2=0 fc3=0 ids=[]
+Trial 4/5 done in 111.6s success=True fc1=0 fc2=0 fc3=0 ids=[]
+Trial 5/5 done in 111.9s success=True fc1=0 fc2=0 fc3=0 ids=[]
+result: FC2_rate=0.000 FC1_rate=0.000 FC3_rate=0.000 total_failures=0 avg_time=112.5s protocol=native topology=fully_connected n_agents=5 task=code
+
+--- STDERR ---
