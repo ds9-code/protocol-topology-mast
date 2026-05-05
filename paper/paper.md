@@ -13,15 +13,14 @@ communication protocol versus organizational topology.
 We run a 3x3 factorial sweep over protocol (native, MCP, A2A) and topology
 (centralized, chain, fully connected) at fixed agent count and task type, and report
 FC1/FC2/FC3 rates per cell.
-**Primary result.** Across the full 9-cell 3x3 grid balanced at 10 trials per
-cell (90 trials, gpt-4.1-nano / gpt-4.1-mini / gpt-4o-mini worker with
-model-cascade fallback, gpt-3.5-turbo annotator), the best cell
-(a2a x centralized) achieves FC2 = 0.00 over 10 trials with zero variance,
-versus 0.60 for the worst cell (native x chain). Two-way ANOVA reveals a
-significant main effect of topology on FC2 (F(2,81) = 3.30, p = 0.042); the
-main effect of protocol does not reach significance (F(2,81) = 0.47, p = 0.63)
-and the protocol x topology interaction is not significant (F(4,81) = 0.94,
-p = 0.44). A Welch t-test of the best vs worst cell yields T = -2.71, p = 0.024.
+**Primary result.** Across the full 9-cell 3x3 grid (95 trials, 10 per cell
+plus 5 extra at the best cell, gpt-4.1-nano / gpt-4.1-mini / gpt-4o-mini
+worker with model-cascade fallback, gpt-3.5-turbo annotator), the best cell
+(a2a x centralized) achieves FC2 = 0.07 over 15 trials, versus 0.60 for the
+worst cell (native x chain). One-way ANOVA on FC2 by topology reveals a
+significant main effect (F(2,92) = 3.39, p = 0.038); the main effect of
+protocol does not reach significance (F(2,92) = 0.50, p = 0.61). A Welch
+t-test of the best vs worst cell yields T = -2.31, p = 0.042.
 
 ## 1. Introduction
 
