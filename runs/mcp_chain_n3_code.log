@@ -1,0 +1,8 @@
+Trial 1/5 done in 37.8s success=True fc1=0 fc2=0 fc3=2 ids=['3.2', '3.3']
+Trial 2/5 done in 48.8s success=True fc1=0 fc2=0 fc3=0 ids=[]
+Trial 3/5 done in 78.2s success=True fc1=0 fc2=1 fc3=1 ids=['2.6', '3.2']
+Trial 4/5 done in 21.3s success=False fc1=0 fc2=1 fc3=0 ids=['CRASH']
+Trial 5/5 done in 67.5s success=False fc1=0 fc2=1 fc3=0 ids=['CRASH']
+result: FC2_rate=0.600 FC1_rate=0.000 FC3_rate=0.600 total_failures=8 avg_time=50.7s protocol=mcp topology=chain n_agents=3 task=code
+
+--- STDERR ---
