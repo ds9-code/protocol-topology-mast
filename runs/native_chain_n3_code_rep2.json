@@ -1,0 +1,86 @@
+{
+  "config": {
+    "protocol": "native",
+    "topology": "chain",
+    "n_agents": 3,
+    "task_type": "code",
+    "n_trials": 5,
+    "model": "gpt-4.1-mini",
+    "annot_model": "gpt-3.5-turbo"
+  },
+  "summary": {
+    "fc1_rate": 0.0,
+    "fc2_rate": 1.0,
+    "fc3_rate": 0.0,
+    "total_failures": 10,
+    "avg_time": 37.89277014732361,
+    "crash_total": 5
+  },
+  "trials": [
+    {
+      "i": 0,
+      "task": "Write a Python function that finds all prime numbers up to N",
+      "elapsed": 30.835461378097534,
+      "success": false,
+      "fc1": 0,
+      "fc2": 1,
+      "fc3": 0,
+      "ids": [
+        "CRASH"
+      ],
+      "err": "Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-3.5-turbo in organization org-nk7zhzom2pOXZ4RL6JKJvTd1 on requests per day (RPD): Limit 200, Used 200, Requested 1. Please try again in 7m12s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing.', 'type': 'requests', 'param': None, 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "i": 1,
+      "task": "Write a function that merges two sorted lists into one sorte",
+      "elapsed": 45.47640085220337,
+      "success": false,
+      "fc1": 0,
+      "fc2": 1,
+      "fc3": 0,
+      "ids": [
+        "CRASH"
+      ],
+      "err": "Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o-mini in organization org-nk7zhzom2pOXZ4RL6JKJvTd1 on requests per min (RPM): Limit 3, Used 3, Requested 1. Please try again in 20s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing.', 'type': 'requests', 'param': None, 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "i": 2,
+      "task": "Write a function that detects cycles in a linked list.",
+      "elapsed": 21.01601004600525,
+      "success": false,
+      "fc1": 0,
+      "fc2": 1,
+      "fc3": 0,
+      "ids": [
+        "CRASH"
+      ],
+      "err": "Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o-mini in organization org-nk7zhzom2pOXZ4RL6JKJvTd1 on requests per min (RPM): Limit 3, Used 3, Requested 1. Please try again in 20s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing.', 'type': 'requests', 'param': None, 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "i": 3,
+      "task": "Write a Python function that finds all prime numbers up to N",
+      "elapsed": 26.436997413635254,
+      "success": false,
+      "fc1": 0,
+      "fc2": 1,
+      "fc3": 0,
+      "ids": [
+        "CRASH"
+      ],
+      "err": "Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o-mini in organization org-nk7zhzom2pOXZ4RL6JKJvTd1 on requests per min (RPM): Limit 3, Used 3, Requested 1. Please try again in 20s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing.', 'type': 'requests', 'param': None, 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "i": 4,
+      "task": "Write a function that merges two sorted lists into one sorte",
+      "elapsed": 65.69898104667664,
+      "success": false,
+      "fc1": 0,
+      "fc2": 1,
+      "fc3": 0,
+      "ids": [
+        "CRASH"
+      ],
+      "err": "Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o-mini in organization org-nk7zhzom2pOXZ4RL6JKJvTd1 on requests per day (RPD): Limit 200, Used 200, Requested 1. Please try again in 7m12s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing.', 'type': 'requests', 'param': None, 'code': 'rate_limit_exceeded'}}"
+    }
+  ]
+}
