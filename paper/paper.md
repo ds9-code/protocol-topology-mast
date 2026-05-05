@@ -76,7 +76,8 @@ a2a x centralized shows a monotonic FC2 increase with N (0, 0, 0.2, 0.4),
 consistent with the intuition that as the orchestrator's fan-out grows the
 chance of cross-agent misalignment grows. The fully_connected cells are
 non-monotonic in N because their cells span multiple worker models due to
-free-tier rate-limit cycling (see Limitations).
+free-tier rate-limit cycling (see Limitations). See Figure 4
+(`figures/fig4_n_scaling.png`).
 
 ### 3.3 Sweep 3: TASK_TYPE generalization (best cell)
 
@@ -100,7 +101,7 @@ that two of five trials had four-or-more FC2 codes triggered (typically
 while the other three trials were clean. The bimodality suggests that for
 open-ended planning the orchestrator's decomposition occasionally hands
 each executor an under-specified slice that they then fill in inconsistent
-ways.
+ways. See Figure 5 (`figures/fig5_task_generalization.png`).
 
 ### 3.4 ANOVA
 
