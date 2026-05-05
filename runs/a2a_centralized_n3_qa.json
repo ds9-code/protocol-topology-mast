@@ -1,0 +1,81 @@
+{
+  "config": {
+    "protocol": "a2a",
+    "topology": "centralized",
+    "n_agents": 3,
+    "task_type": "qa",
+    "n_trials": 5,
+    "model": "gpt-4.1-mini",
+    "annot_model": "gpt-3.5-turbo"
+  },
+  "summary": {
+    "fc1_rate": 0.4,
+    "fc2_rate": 0.0,
+    "fc3_rate": 0.2,
+    "total_failures": 3,
+    "avg_time": 68.6811019897461,
+    "crash_total": 0
+  },
+  "trials": [
+    {
+      "i": 0,
+      "task": "What are the main differences between supervised and unsuper",
+      "elapsed": 54.769498348236084,
+      "success": true,
+      "fc1": 0,
+      "fc2": 0,
+      "fc3": 0,
+      "ids": [],
+      "err": null
+    },
+    {
+      "i": 1,
+      "task": "Explain why gradient descent can get stuck in local minima.",
+      "elapsed": 69.83324575424194,
+      "success": true,
+      "fc1": 2,
+      "fc2": 0,
+      "fc3": 0,
+      "ids": [
+        "1.3",
+        "1.5"
+      ],
+      "err": null
+    },
+    {
+      "i": 2,
+      "task": "What is the vanishing gradient problem and how does batch no",
+      "elapsed": 66.3427164554596,
+      "success": true,
+      "fc1": 0,
+      "fc2": 0,
+      "fc3": 0,
+      "ids": [],
+      "err": null
+    },
+    {
+      "i": 3,
+      "task": "What are the main differences between supervised and unsuper",
+      "elapsed": 66.5694055557251,
+      "success": true,
+      "fc1": 0,
+      "fc2": 0,
+      "fc3": 0,
+      "ids": [],
+      "err": null
+    },
+    {
+      "i": 4,
+      "task": "Explain why gradient descent can get stuck in local minima.",
+      "elapsed": 85.89064383506775,
+      "success": true,
+      "fc1": 0,
+      "fc2": 0,
+      "fc3": 1,
+      "ids": [
+        "3.2"
+      ],
+      "err": null
+    }
+  ]
+}

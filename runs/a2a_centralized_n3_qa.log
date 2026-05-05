@@ -1,0 +1,15 @@
+!! gpt-4.1-mini still RPM-limited after retries, trying next
+!! gpt-4.1-mini still RPM-limited after retries, trying next
+!! RPD-banning gpt-4o, trying next fallback
+!! gpt-4.1-mini still RPM-limited after retries, trying next
+Trial 1/5 done in 54.8s success=True fc1=0 fc2=0 fc3=0 ids=[]
+!! gpt-4.1-mini still RPM-limited after retries, trying next
+!! gpt-4.1-mini still RPM-limited after retries, trying next
+!! RPD-banning gpt-4.1-mini, trying next fallback
+Trial 2/5 done in 69.8s success=True fc1=2 fc2=0 fc3=0 ids=['1.3', '1.5']
+Trial 3/5 done in 66.3s success=True fc1=0 fc2=0 fc3=0 ids=[]
+Trial 4/5 done in 66.6s success=True fc1=0 fc2=0 fc3=0 ids=[]
+Trial 5/5 done in 85.9s success=True fc1=0 fc2=0 fc3=1 ids=['3.2']
+result: FC2_rate=0.000 FC1_rate=0.400 FC3_rate=0.200 total_failures=3 avg_time=68.7s protocol=a2a topology=centralized n_agents=3 task=qa
+
+--- STDERR ---
