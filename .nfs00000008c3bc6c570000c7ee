@@ -1,0 +1,5 @@
+Running 4 configs
+[2026-05-05T03:38:38] a2a_fully_connected_n5_code status=ok wall=704.1s fc1=0.000 fc2=0.000 fc3=0.000 fails=0
+[2026-05-05T03:43:12] native_fully_connected_n2_code status=ok wall=273.7s fc1=0.200 fc2=0.200 fc3=0.000 fails=2
+[2026-05-05T03:51:21] native_fully_connected_n4_code status=ok wall=488.8s fc1=0.200 fc2=0.600 fc3=0.400 fails=6
+[2026-05-05T04:00:55] native_fully_connected_n5_code status=ok wall=574.0s fc1=0.000 fc2=0.000 fc3=0.000 fails=0

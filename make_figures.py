@@ -86,9 +86,43 @@ def fig3_interaction(df, out="figures/fig3_interaction.png",
     plt.close()
     print(f"wrote {out}")
 
+def fig4_n_scaling(df, out="figures/fig4_n_scaling.png", task_type="code"):
+    """Plot FC2 vs N_AGENTS for the top-3 cells from sweep 2."""
+    sub = df[(df.task_type == task_type) & (df.status == "ok")].copy()
+    fig, ax = plt.subplots(figsize=(7, 4.5))
+    for (p, t) in [("a2a","centralized"), ("a2a","fully_connected"), ("native","fully_connected")]:
+        r = sub[(sub.protocol==p) & (sub.topology==t)].sort_values("n_agents")
+        if len(r):
+            ax.plot(r.n_agents.astype(int), r.fc2_rate, marker="o", label=f"{p} x {t}", linewidth=2)
+    ax.set_xlabel("N_AGENTS"); ax.set_ylabel("FC2 rate")
+    ax.set_title("FC2 rate vs N_AGENTS for top-3 cells")
+    ax.set_xticks([2,3,4,5])
+    ax.legend(); ax.grid(True, alpha=0.3)
+    plt.tight_layout(); plt.savefig(out, dpi=150, bbox_inches="tight"); plt.close()
+    print(f"wrote {out}")
+
+def fig5_task_generalization(df, out="figures/fig5_task_generalization.png"):
+    """FC1/FC2/FC3 for the best cell across task types."""
+    sub = df[(df.protocol=="a2a") & (df.topology=="centralized") & (df.n_agents==3) & (df.status=="ok")]
+    if len(sub) < 2: return
+    rows = sub.sort_values("task_type")
+    fig, ax = plt.subplots(figsize=(7, 4.5))
+    x = np.arange(len(rows))
+    fc1 = rows.fc1_rate.values; fc2 = rows.fc2_rate.values; fc3 = rows.fc3_rate.values
+    w = 0.25
+    ax.bar(x - w, fc1, w, label="FC1 (specification)", color="#4c72b0")
+    ax.bar(x,     fc2, w, label="FC2 (inter-agent)", color="#dd8452")
+    ax.bar(x + w, fc3, w, label="FC3 (verification)", color="#55a868")
+    ax.set_xticks(x); ax.set_xticklabels(rows.task_type.values)
+    ax.set_ylabel("Mean failure rate (per trial)")
+    ax.set_title("a2a x centralized x N=3 across task types")
+    ax.legend()
+    plt.tight_layout(); plt.savefig(out, dpi=150, bbox_inches="tight"); plt.close()
+    print(f"wrote {out}")
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--which", default="1,2,3")
+    ap.add_argument("--which", default="1,2,3,4,5")
     ap.add_argument("--task_type", default="code")
     ap.add_argument("--n_agents", type=int, default=3)
     args = ap.parse_args()
@@ -97,6 +131,8 @@ def main():
     if "1" in args.which: fig1_heatmap(df, task_type=args.task_type, n_agents=args.n_agents)
     if "2" in args.which: fig2_failure_breakdown(df, task_type=args.task_type, n_agents=args.n_agents)
     if "3" in args.which: fig3_interaction(df, task_type=args.task_type, n_agents=args.n_agents)
+    if "4" in args.which: fig4_n_scaling(df, task_type=args.task_type)
+    if "5" in args.which: fig5_task_generalization(df)
 
 if __name__ == "__main__":
     main()
