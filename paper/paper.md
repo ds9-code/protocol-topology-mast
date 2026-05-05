@@ -138,12 +138,15 @@ versus chain at 0.43, and the gap is statistically significant.
 ## 4. Discussion
 
 **Hypothesis verdict.** The hypothesis that *A2A + centralized minimizes FC2*
-is supported descriptively (FC2 = 0.00, the only cell with zero failures of
-any kind in 5 trials). The marginal effects of protocol and topology each
-trend significant on their own; the interaction term is small and not
-significant at this sample size. Stated more carefully: *both* picking A2A
-*and* picking centralized independently lower FC2, and choosing both
-together compounds without a detectable extra interaction kick.
+is supported descriptively: a2a x centralized achieves FC2 = 0.00 with zero
+variance over 10 replicated trials, the only cell to do so. After
+replication, *topology* has a statistically significant main effect on FC2
+(p = 0.030), driven by chain being a poor topology (FC2 = 0.43) compared
+to centralized (FC2 = 0.13). The *protocol* main effect is not significant
+once both replicates are pooled (p = 0.38), so the FC2 = 0.00 result for
+a2a x centralized is best read as: *centralized is the load-bearing axis,
+and A2A's structured envelope helps marginally on top.* The interaction
+term is small and not significant.
 
 **Why does MCP underperform native?** A natural prediction is that MCP's
 JSON-RPC envelope and tool registry should reduce ambiguity. Instead MCP has
