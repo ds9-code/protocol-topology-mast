@@ -1,0 +1,8 @@
+Trial 1/5 done in 71.9s success=True fc1=0 fc2=0 fc3=1 ids=['3.3']
+Trial 2/5 done in 91.1s success=True fc1=0 fc2=0 fc3=0 ids=[]
+Trial 3/5 done in 74.4s success=True fc1=1 fc2=0 fc3=0 ids=['1.5']
+Trial 4/5 done in 77.1s success=True fc1=0 fc2=0 fc3=0 ids=[]
+Trial 5/5 done in 100.0s success=True fc1=0 fc2=0 fc3=0 ids=[]
+result: FC2_rate=0.000 FC1_rate=0.200 FC3_rate=0.200 total_failures=2 avg_time=82.9s protocol=native topology=fully_connected n_agents=3 task=code
+
+--- STDERR ---
