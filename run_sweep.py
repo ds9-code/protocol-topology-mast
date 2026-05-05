@@ -83,6 +83,17 @@ def run_one(protocol, topology, n_agents, task_type, n_trials=5, timeout_s=1200)
     print(f"[{ts}] {cell_id} status={status} wall={wall:.1f}s "
           f"fc1={row[6]} fc2={row[7]} fc3={row[8]} fails={row[9]}")
     sys.stdout.flush()
+
+    # Auto-commit and push after each cell, per program.md "After EVERY experiment"
+    try:
+        msg = f"exp: {cell_id} status={status} fc2={row[7]} fails={row[9]}"
+        subprocess.run(["git", "add", "-A"], check=False)
+        subprocess.run(["git", "commit", "-m", msg, "--no-verify"],
+                       check=False, capture_output=True)
+        subprocess.run(["git", "push", "origin", "master"],
+                       check=False, capture_output=True, timeout=60)
+    except Exception as e:
+        print(f"!! auto-push failed: {e}", flush=True)
     return status, row
 
 def main():
