@@ -1,0 +1,35 @@
+{
+  "config": {
+    "protocol": "native",
+    "topology": "centralized",
+    "n_agents": 3,
+    "task_type": "code",
+    "n_trials": 1,
+    "model": "gpt-4o-mini",
+    "annot_model": "gpt-4o-mini"
+  },
+  "summary": {
+    "fc1_rate": 0.0,
+    "fc2_rate": 0.0,
+    "fc3_rate": 0.0,
+    "total_failures": 0,
+    "avg_time": 35.500693559646606,
+    "crash_total": 0
+  },
+  "trials": [
+    {
+      "i": 0,
+      "task": "Write a Python function that finds all prime numbers up to N",
+      "elapsed": 35.500693559646606,
+      "success": true,
+      "fc1": 0,
+      "fc2": 0,
+      "fc3": 0,
+      "ids": [
+        "task_completion",
+        "total_failures"
+      ],
+      "err": null
+    }
+  ]
+}

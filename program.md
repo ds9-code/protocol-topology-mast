@@ -1,114 +1,79 @@
-# autoresearch
+# Agent Instructions - Experiment 1: Protocol x Topology x MAST
 
-This is an experiment to have the LLM do its own research.
+Before starting, read ~/AGENT_README.md for cluster setup and update instructions.
 
-## Setup
+## First Action - Create GitHub Repo
 
-To set up a new experiment, work with the user to:
+Before running any experiments, set up the GitHub repo and paper structure:
 
-1. **Agree on a run tag**: propose a tag based on today's date (e.g. `mar5`). The branch `autoresearch/<tag>` must not already exist — this is a fresh run.
-2. **Create the branch**: `git checkout -b autoresearch/<tag>` from current master.
-3. **Read the in-scope files**: The repo is small. Read these files for full context:
-   - `README.md` — repository context.
-   - `prepare.py` — fixed constants, data prep, tokenizer, dataloader, evaluation. Do not modify.
-   - `train.py` — the file you modify. Model architecture, optimizer, training loop.
-4. **Verify data exists**: Check that `~/.cache/autoresearch/` contains data shards and a tokenizer. If not, tell the human to run `uv run prepare.py`.
-5. **Initialize results.tsv**: Create `results.tsv` with just the header row. The baseline will be recorded after the first run.
-6. **Confirm and go**: Confirm setup looks good.
-
-Once you get confirmation, kick off the experimentation.
-
-## Experimentation
-
-Each experiment runs on a single GPU. The training script runs for a **fixed time budget of 5 minutes** (wall clock training time, excluding startup/compilation). You launch it simply as: `uv run train.py`.
-
-**What you CAN do:**
-- Modify `train.py` — this is the only file you edit. Everything is fair game: model architecture, optimizer, hyperparameters, training loop, batch size, model size, etc.
-
-**What you CANNOT do:**
-- Modify `prepare.py`. It is read-only. It contains the fixed evaluation, data loading, tokenizer, and training constants (time budget, sequence length, etc).
-- Install new packages or add dependencies. You can only use what's already in `pyproject.toml`.
-- Modify the evaluation harness. The `evaluate_bpb` function in `prepare.py` is the ground truth metric.
-
-**The goal is simple: get the lowest val_bpb.** Since the time budget is fixed, you don't need to worry about training time — it's always 5 minutes. Everything is fair game: change the architecture, the optimizer, the hyperparameters, the batch size, the model size. The only constraint is that the code runs without crashing and finishes within the time budget.
-
-**VRAM** is a soft constraint. Some increase is acceptable for meaningful val_bpb gains, but it should not blow up dramatically.
-
-**Simplicity criterion**: All else being equal, simpler is better. A small improvement that adds ugly complexity is not worth it. Conversely, removing something and getting equal or better results is a great outcome — that's a simplification win. When evaluating whether to keep a change, weigh the complexity cost against the improvement magnitude. A 0.001 val_bpb improvement that adds 20 lines of hacky code? Probably not worth it. A 0.001 val_bpb improvement from deleting code? Definitely keep. An improvement of ~0 but much simpler code? Keep.
-
-**The first run**: Your very first run should always be to establish the baseline, so you will run the training script as is.
-
-## Output format
-
-Once the script finishes it prints a summary like this:
-
-```
----
-val_bpb:          0.997900
-training_seconds: 300.1
-total_seconds:    325.9
-peak_vram_mb:     45060.2
-mfu_percent:      39.80
-total_tokens_M:   499.6
-num_steps:        953
-num_params_M:     50.3
-depth:            8
+```bash
+gh repo create $GITHUB_USERNAME/protocol-topology-mast --private --source=. --remote=origin --push
+mkdir -p paper/sections figures
+touch paper/paper.md paper/main.tex paper/references.bib figures/.gitkeep
+touch paper/sections/introduction.tex paper/sections/related_work.tex
+touch paper/sections/method.tex paper/sections/experiments.tex paper/sections/conclusion.tex
+git add .
+git commit -m "add paper structure and figures folder"
+git push origin main
 ```
 
-Note that the script is configured to always stop after 5 minutes, so depending on the computing platform of this computer the numbers might look different. You can extract the key metric from the log file:
+## Research Goal
+Measure how protocol (native/MCP/A2A) and topology (centralized/chain/fully_connected)
+interact to produce different MAST failure mode distributions.
 
-```
-grep "^val_bpb:" run.log
-```
+Hypothesis: A2A + centralized minimizes FC2 (Inter-Agent Misalignment) specifically.
 
-## Logging results
+## Metric
+Run: uv run train.py > run.log 2>&1
+Extract: grep "^result:" run.log
+Primary metric: FC2_rate (lower is better). Track all three: FC1, FC2, FC3.
 
-When an experiment is done, log it to `results.tsv` (tab-separated, NOT comma-separated — commas break in descriptions).
+## Baseline
+"Towards a Science of Scaling Agent Systems" (2025): 41-86% aggregate failure rates.
 
-The TSV has a header row and 5 columns:
+## Parameters You Can Modify in train.py
+- PROTOCOL: "native" | "mcp" | "a2a"
+- TOPOLOGY: "centralized" | "chain" | "fully_connected"
+- N_AGENTS: integer 2-6
+- TASK_TYPE: "code" | "qa" | "planning"
+- N_TRIALS: keep at 5
 
-```
-commit	val_bpb	memory_gb	status	description
-```
+## Experiment Order
+First: full systematic sweep, N_AGENTS=3, TASK_TYPE="code":
+  native x centralized, native x chain, native x fully_connected
+  mcp x centralized, mcp x chain, mcp x fully_connected
+  a2a x centralized, a2a x chain, a2a x fully_connected
 
-1. git commit hash (short, 7 chars)
-2. val_bpb achieved (e.g. 1.234567) — use 0.000000 for crashes
-3. peak memory in GB, round to .1f (e.g. 12.3 — divide peak_vram_mb by 1024) — use 0.0 for crashes
-4. status: `keep`, `discard`, or `crash`
-5. short text description of what this experiment tried
+Then: vary N_AGENTS (2, 4, 5) for top 3 combinations.
+Then: vary TASK_TYPE for the best combination.
 
-Example:
+## Paper Writing
 
-```
-commit	val_bpb	memory_gb	status	description
-a1b2c3d	0.997900	44.0	keep	baseline
-b2c3d4e	0.993200	44.2	keep	increase LR to 0.04
-c3d4e5f	1.005000	44.0	discard	switch to GeLU activation
-d4e5f6g	0.000000	0.0	crash	double model width (OOM)
-```
+The deadline is May 8. Write the paper as you go - do not wait until all
+experiments are done.
 
-## The experiment loop
+After every 10 experiments:
+- Open paper/paper.md
+- Update the Results table with current best numbers (replace RESULT placeholders)
+- Update the Abstract with current best numbers
 
-The experiment runs on a dedicated branch (e.g. `autoresearch/mar5` or `autoresearch/mar5-gpu0`).
+After each sweep is complete:
+- Generate the figure for that sweep using matplotlib, save to figures/
+- Sweep 1 done -> generate figures/fig1_fc2_heatmap.png (3x3 heatmap of FC2_rate by protocol x topology)
+- Sweep 2 done -> generate figures/fig2_failure_breakdown.png (stacked bar FC1/FC2/FC3 by protocol)
+- After ANOVA -> generate figures/fig3_interaction.png (interaction plot)
 
-LOOP FOREVER:
+Use matplotlib with Agg backend (non-interactive, works on cluster):
+  import matplotlib; matplotlib.use('Agg')
+  import matplotlib.pyplot as plt
+  plt.savefig('figures/fig1_fc2_heatmap.png', dpi=150, bbox_inches='tight')
+  plt.close()
 
-1. Look at the git state: the current branch/commit we're on
-2. Tune `train.py` with an experimental idea by directly hacking the code.
-3. git commit
-4. Run the experiment: `uv run train.py > run.log 2>&1` (redirect everything — do NOT use tee or let output flood your context)
-5. Read out the results: `grep "^val_bpb:\|^peak_vram_mb:" run.log`
-6. If the grep output is empty, the run crashed. Run `tail -n 50 run.log` to read the Python stack trace and attempt a fix. If you can't get things to work after more than a few attempts, give up.
-7. Record the results in the tsv (NOTE: do not commit the results.tsv file, leave it untracked by git)
-8. If val_bpb improved (lower), you "advance" the branch, keeping the git commit
-9. If val_bpb is equal or worse, you git reset back to where you started
+After every commit, push to GitHub:
+  git push origin main
 
-The idea is that you are a completely autonomous researcher trying things out. If they work, keep. If they don't, discard. And you're advancing the branch so that you can iterate. If you feel like you're getting stuck in some way, you can rewind but you should probably do this very very sparingly (if ever).
-
-**Timeout**: Each experiment should take ~5 minutes total (+ a few seconds for startup and eval overhead). If a run exceeds 10 minutes, kill it and treat it as a failure (discard and revert).
-
-**Crashes**: If a run crashes (OOM, or a bug, or etc.), use your judgment: If it's something dumb and easy to fix (e.g. a typo, a missing import), fix it and re-run. If the idea itself is fundamentally broken, just skip it, log "crash" as the status in the tsv, and move on.
-
-**NEVER STOP**: Once the experiment loop has begun (after the initial setup), do NOT pause to ask the human if you should continue. Do NOT ask "should I keep going?" or "is this a good stopping point?". The human might be asleep, or gone from a computer and expects you to continue working *indefinitely* until you are manually stopped. You are autonomous. If you run out of ideas, think harder — read papers referenced in the code, re-read the in-scope files for new angles, try combining previous near-misses, try more radical architectural changes. The loop runs until the human interrupts you, period.
-
-As an example use case, a user might leave you running while they sleep. If each experiment takes you ~5 minutes then you can run approx 12/hour, for a total of about 100 over the duration of the average human sleep. The user then wakes up to experimental results, all completed by you while they slept!
+## Rules
+- Each run under 10 minutes. If it hangs, kill it and move on.
+- Commit every completed sweep: git add results.tsv paper/ figures/ && git commit -m "exp1: sweep complete FC2_best={value}"
+- Never stop. Minimum 45 experiments.
+- Update ~/experiment_updates.md every 5 experiments.
