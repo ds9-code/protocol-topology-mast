@@ -1,0 +1,17 @@
+\begin{thebibliography}{1}
+
+\bibitem{mast2024}
+Anonymous.
+\newblock {MAST}: A taxonomy of failure modes for multi-agent {LLM} systems.
+\newblock {\em arXiv preprint}, 2024.
+\newblock Failure-mode taxonomy used by the \texttt{agentdash} reference
+  annotator.
+
+\bibitem{scaling_agents_2025}
+Anonymous.
+\newblock Towards a science of scaling agent systems.
+\newblock {\em arXiv preprint}, 2025.
+\newblock Reports 41--86\% aggregate failure rates across multi-agent
+  benchmarks.
+
+\end{thebibliography}
