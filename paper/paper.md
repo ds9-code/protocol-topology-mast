@@ -81,8 +81,26 @@ free-tier rate-limit cycling (see Limitations).
 ### 3.3 Sweep 3: TASK_TYPE generalization (best cell)
 
 We held the best cell (a2a x centralized, N=3) and re-ran for
-TASK_TYPE in {qa, planning} to test whether the protocol/topology effect
-transfers across task domains. *Results pending sweep 3 completion.*
+TASK_TYPE in {qa, planning} to test whether the FC2 = 0 result transfers
+across task domains.
+
+| Task type | FC1  | FC2  | FC3  | Notes                                 |
+|-----------|------|------|------|---------------------------------------|
+| code      | 0.00 | 0.00 | 0.40 | (Sweep 1 cell, N=3)                   |
+| qa        | 0.40 | 0.00 | 0.20 | FC2 transfers cleanly                 |
+| planning  | 0.40 | 1.60 | 0.40 | FC2 collapses; large per-trial counts |
+
+The FC2 = 0 result *transfers* from code to qa, but breaks down sharply on
+planning tasks: per-trial FC2 codes jump to a mean of 1.6 (note the rate is
+above 1.0 because a single trial can trigger multiple FC2 codes,
+e.g.\ 2.1 *and* 2.2 *and* 2.6). Inspection of the planning traces shows
+that two of five trials had four-or-more FC2 codes triggered (typically
+\textit{Disobey Role Specification} (2.1), \textit{Information Withholding} (2.2),
+\textit{Reasoning-Action Mismatch} (2.3), and \textit{Misalignment} (2.6))
+while the other three trials were clean. The bimodality suggests that for
+open-ended planning the orchestrator's decomposition occasionally hands
+each executor an under-specified slice that they then fill in inconsistent
+ways.
 
 ### 3.4 ANOVA
 

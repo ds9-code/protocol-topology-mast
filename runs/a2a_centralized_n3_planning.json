@@ -1,0 +1,91 @@
+{
+  "config": {
+    "protocol": "a2a",
+    "topology": "centralized",
+    "n_agents": 3,
+    "task_type": "planning",
+    "n_trials": 5,
+    "model": "gpt-4.1-mini",
+    "annot_model": "gpt-3.5-turbo"
+  },
+  "summary": {
+    "fc1_rate": 0.4,
+    "fc2_rate": 1.6,
+    "fc3_rate": 0.4,
+    "total_failures": 12,
+    "avg_time": 69.71719527244568,
+    "crash_total": 0
+  },
+  "trials": [
+    {
+      "i": 0,
+      "task": "Plan the steps to deploy a web application from development ",
+      "elapsed": 58.75015616416931,
+      "success": true,
+      "fc1": 0,
+      "fc2": 4,
+      "fc3": 1,
+      "ids": [
+        "2.1",
+        "2.2",
+        "2.3",
+        "2.6",
+        "3.2"
+      ],
+      "err": null
+    },
+    {
+      "i": 1,
+      "task": "Plan how to migrate a PostgreSQL database to a new server wi",
+      "elapsed": 51.641669273376465,
+      "success": true,
+      "fc1": 0,
+      "fc2": 0,
+      "fc3": 0,
+      "ids": [],
+      "err": null
+    },
+    {
+      "i": 2,
+      "task": "Plan the steps to set up a CI/CD pipeline for a Python proje",
+      "elapsed": 96.58400344848633,
+      "success": true,
+      "fc1": 0,
+      "fc2": 2,
+      "fc3": 0,
+      "ids": [
+        "2.2",
+        "2.6"
+      ],
+      "err": null
+    },
+    {
+      "i": 3,
+      "task": "Plan the steps to deploy a web application from development ",
+      "elapsed": 69.77380204200745,
+      "success": true,
+      "fc1": 2,
+      "fc2": 2,
+      "fc3": 1,
+      "ids": [
+        "1.4",
+        "1.5",
+        "2.1",
+        "2.3",
+        "3.3"
+      ],
+      "err": null
+    },
+    {
+      "i": 4,
+      "task": "Plan how to migrate a PostgreSQL database to a new server wi",
+      "elapsed": 71.83634543418884,
+      "success": true,
+      "fc1": 0,
+      "fc2": 0,
+      "fc3": 0,
+      "ids": [],
+      "err": null
+    }
+  ]
+}
