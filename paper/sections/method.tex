@@ -1,0 +1,49 @@
+\section{Method}
+
+\subsection{Agents and protocols}
+
+Each agent is a single OpenAI \textsc{gpt-4o-mini} chat completion seeded with a role
+system message identifying its name (\textsc{orchestrator} or \textsc{executor}\_$i$),
+the peer set, and the protocol-specific scaffolding. The three protocols differ only
+in the system-prompt scaffolding and the message envelope used in the transcript:
+
+\begin{itemize}
+\item \textbf{Native:} plain-text messages, no capability registry, agents addressed
+      directly by name.
+\item \textbf{MCP:} agents are told they communicate via JSON-RPC envelopes over a
+      Model Context Protocol tools/list registry, and must briefly acknowledge the
+      tool/role before producing content. Messages are wrapped in
+      \texttt{<mcp:message from=... to=...>}.
+\item \textbf{A2A:} agents have Agent Cards advertising their capabilities; replies are
+      prefixed with \texttt{[from <sender> -> <recipient>]} so a router can dispatch.
+\end{itemize}
+
+\subsection{Topologies}
+
+\begin{itemize}
+\item \textbf{Centralized:} agent 0 (\textsc{orchestrator}) decomposes the task,
+      dispatches one subtask per executor, then integrates their replies into a final
+      answer.
+\item \textbf{Chain:} a sequential pipeline agent\_0 $\rightarrow$ agent\_1
+      $\rightarrow \cdots \rightarrow$ agent\_{N-1}, with each stage receiving only the
+      previous stage's output.
+\item \textbf{Fully connected:} a group chat where in each of two rounds every agent
+      sees the full prior conversation and contributes; the system terminates when an
+      agent emits \texttt{DONE: <answer>}.
+\end{itemize}
+
+\subsection{MAST annotation}
+
+Each trial trace (the concatenated transcript) is annotated by
+\texttt{agentdash.annotator} (model: \textsc{gpt-4o-mini}), which returns the MAST
+failure-mode dictionary\,\cite{mast2024}. We aggregate the 14 failure-mode codes into
+the three coarse categories FC1 (\texttt{1.x}, specification issues), FC2 (\texttt{2.x},
+inter-agent misalignment), and FC3 (\texttt{3.x}, task verification). Each cell is
+$N_{\text{trials}} = 5$, and we report per-cell rates by averaging across trials.
+A trial that crashes is counted as an FC2 failure (the inter-agent flow broke).
+
+\subsection{Hyperparameters held fixed}
+
+\textsc{gpt-4o-mini}, \texttt{temperature}=0.7, \texttt{max\_tokens}=400 per agent
+turn, \texttt{timeout}=60s per OpenAI call, $N_{\text{trials}}=5$. Sweep~1 holds
+$N_{\text{agents}}=3$ and \texttt{task\_type}=\textsc{code}.

@@ -1,0 +1,39 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+
+\title{Protocol $\times$ Topology $\times$ MAST: \\
+  How Communication Structure Shapes Multi-Agent Failure Modes}
+\author{Diya Sreedhar\\
+  Mzitnik Lab, Harvard University\\
+  \texttt{diyasreedhar@college.harvard.edu}}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Multi-agent LLM systems fail in characteristic ways captured by the MAST taxonomy.
+Prior work reports 41--86\% aggregate failure rates but does not isolate the
+contribution of communication protocol from organizational topology. We run a
+$3 \times 3$ factorial sweep over protocol (\textsc{native}, \textsc{mcp},
+\textsc{a2a}) and topology (\textsc{centralized}, \textsc{chain},
+\textsc{fully\_connected}) at fixed agent count and task type, and report FC1/FC2/FC3
+rates per cell. \emph{(Primary results pending sweep~1 completion.)} We test the
+hypothesis that A2A combined with a centralized topology specifically minimizes FC2
+(inter-agent misalignment) failures.
+\end{abstract}
+
+\input{sections/introduction}
+\input{sections/related_work}
+\input{sections/method}
+\input{sections/experiments}
+\input{sections/conclusion}
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

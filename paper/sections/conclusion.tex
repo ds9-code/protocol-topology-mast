@@ -1,0 +1,19 @@
+\section{Conclusion}
+
+We presented a controlled $3 \times 3$ factorial study of communication protocol
+(\textsc{native}, \textsc{mcp}, \textsc{a2a}) crossed with organizational topology
+(\textsc{centralized}, \textsc{chain}, \textsc{fully\_connected}) for a fixed
+3-agent code-generation suite, scored against the MAST failure-mode taxonomy.
+\emph{(Full quantitative claims pending sweep completion.)}
+
+Limitations: (i) $N_{\text{trials}} = 5$ per cell yields high variance per-trial,
+mitigated only by averaging; (ii) the protocol distinction is implemented at the
+prompt layer (envelope and capability scaffolding) rather than at the transport
+layer, so we measure how protocol \emph{prompting} influences agent behavior, not
+the impact of protocol-level transport semantics; (iii) MAST annotation is itself
+LLM-judged and inherits annotator bias.
+
+Future work: replicate at $N_{\text{agents}} = 5$+ where coordination overhead
+should amplify protocol effects; replace the prompt-level protocol scaffolding with
+a real MCP/A2A transport stack; extend the MAST annotator to a multi-annotator
+agreement-checked pipeline.

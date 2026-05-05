@@ -1,0 +1,60 @@
+\section{Experiments}
+
+\subsection{Sweep 1 — Protocol $\times$ Topology}
+We hold $N_{\text{agents}} = 3$ and \texttt{task\_type} = \textsc{code} and run the
+full $3 \times 3$ factorial design with $N_{\text{trials}} = 5$ per cell.
+Table~\ref{tab:sweep1} reports the FC1/FC2/FC3 rates and total failures per cell;
+Figure~\ref{fig:fc2_heatmap} visualizes the FC2 rate as a heatmap.
+
+\begin{table}[h]
+\centering
+\caption{Sweep 1 results (\textsc{gpt-4o-mini}, $N=3$, code tasks, 5 trials/cell). Lower is better.}
+\label{tab:sweep1}
+\begin{tabular}{llccccr}
+\toprule
+Protocol & Topology & FC1 & FC2 & FC3 & Total fail & Avg time (s) \\
+\midrule
+native & centralized      & RESULT & RESULT & RESULT & RESULT & RESULT \\
+native & chain            & RESULT & RESULT & RESULT & RESULT & RESULT \\
+native & fully\_connected & RESULT & RESULT & RESULT & RESULT & RESULT \\
+mcp    & centralized      & RESULT & RESULT & RESULT & RESULT & RESULT \\
+mcp    & chain            & RESULT & RESULT & RESULT & RESULT & RESULT \\
+mcp    & fully\_connected & RESULT & RESULT & RESULT & RESULT & RESULT \\
+a2a    & centralized      & RESULT & RESULT & RESULT & RESULT & RESULT \\
+a2a    & chain            & RESULT & RESULT & RESULT & RESULT & RESULT \\
+a2a    & fully\_connected & RESULT & RESULT & RESULT & RESULT & RESULT \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{../figures/fig1_fc2_heatmap.png}
+\caption{FC2 (inter-agent misalignment) rate across the $3 \times 3$
+protocol $\times$ topology grid.}
+\label{fig:fc2_heatmap}
+\end{figure}
+
+\subsection{Sweep 2 — Agent count}
+For the top-3 cells from Sweep~1 by FC2 rate, we vary $N_{\text{agents}} \in \{2,4,5\}$
+to test whether the ranking is preserved as the system scales.
+(Results pending.)
+
+\subsection{Sweep 3 — Task generality}
+For the single best (protocol, topology, $N$) cell from Sweeps~1--2, we vary
+\texttt{task\_type} $\in \{\textsc{qa}, \textsc{planning}\}$ to test whether the
+protocol $\times$ topology interaction is task-specific or transfers.
+(Results pending.)
+
+\subsection{Statistical analysis}
+We will fit a two-way ANOVA on FC2 rate with protocol and topology as factors plus
+their interaction, with cell as the unit of replication, and report main effects and
+the interaction $F$-statistic in Figure~\ref{fig:interaction}. (Pending sweep
+completion.)
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{../figures/fig3_interaction.png}
+\caption{Protocol $\times$ topology interaction plot for FC2 rate.}
+\label{fig:interaction}
+\end{figure}

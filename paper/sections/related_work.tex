@@ -1,0 +1,26 @@
+\section{Related Work}
+
+\paragraph{MAST taxonomy.} The Multi-Agent System Trace (MAST) taxonomy
+\cite{mast2024} catalogs 14 failure modes across three coarse categories:
+specification issues (1.x), inter-agent misalignment (2.x), and task verification
+issues (3.x). We use the \texttt{agentdash} reference annotator to label each trial.
+
+\paragraph{Scaling agent systems.} \cite{scaling_agents_2025} sweep aggregate failure
+rates across multi-agent benchmarks and report 41--86\% failures depending on
+benchmark and stack, but their study does not isolate protocol or topology as a
+controlled factor; we treat their range as the prior baseline against which our
+per-cell FC2 rates should be compared.
+
+\paragraph{Agent communication protocols.} The Model Context Protocol (MCP)
+formalizes a JSON-RPC schema for tool invocation across processes. Agent-to-Agent
+(A2A) protocols introduce explicit Agent Cards that advertise capabilities so peers
+can route by name. Native function-call multi-agent stacks (e.g.\ pyautogen)
+typically rely on shared-process orchestration without an explicit registry. The
+prevailing question for practitioners is whether these protocol differences
+\emph{matter} for failure modes once the topology is held fixed; this paper tests
+that question empirically.
+
+\paragraph{Topology effects.} Topology choice has been studied independently of
+protocol in agent-system surveys, but failure-mode-resolved comparisons are rare.
+Our $3 \times 3$ design is, to our knowledge, the first that jointly varies both
+axes under a single MAST annotator and a fixed task suite.

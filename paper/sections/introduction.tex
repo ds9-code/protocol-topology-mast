@@ -1,0 +1,26 @@
+\section{Introduction}
+
+LLM-based multi-agent systems are deployed for code generation, question answering,
+and planning, and are increasingly assembled from heterogeneous protocols
+(native function-calls, the Model Context Protocol, and Agent-to-Agent messaging)
+arranged in different organizational topologies (centralized orchestrator, sequential
+chain, fully connected group chat). Recent work\,\cite{scaling_agents_2025} reports
+aggregate failure rates of 41--86\% across multi-agent benchmarks, but the
+contribution of \emph{communication protocol} versus \emph{organizational topology}
+to these failures is not separately quantified.
+
+We disentangle these two design axes. Holding the underlying LLM, agent count, and
+task suite fixed, we run a $3 \times 3$ factorial sweep over protocol
+$\in \{\textsc{native}, \textsc{mcp}, \textsc{a2a}\}$ and topology
+$\in \{\textsc{centralized}, \textsc{chain}, \textsc{fully\_connected}\}$, and
+classify every trial trace with the MAST taxonomy
+(FC1: specification issues, FC2: inter-agent misalignment, FC3: task verification
+failures). Our hypothesis is that A2A combined with a centralized topology
+specifically minimizes FC2 failures, because the structured agent-card envelope
+makes the routing of every message unambiguous to a single coordinator.
+
+Our contributions are: (1) a self-contained, no-autogen replication harness for
+protocol $\times$ topology MAST experiments; (2) a $3 \times 3$ FC2 heatmap with
+per-cell FC1/FC3 breakdowns; (3) two follow-up sweeps over agent count
+($N \in \{2,3,4,5\}$) and task type ($\{\textsc{code}, \textsc{qa},
+\textsc{planning}\}$) that test the generality of the best cell.
