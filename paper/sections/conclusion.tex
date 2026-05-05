@@ -1,19 +1,45 @@
 \section{Conclusion}
 
-We presented a controlled $3 \times 3$ factorial study of communication protocol
-(\textsc{native}, \textsc{mcp}, \textsc{a2a}) crossed with organizational topology
-(\textsc{centralized}, \textsc{chain}, \textsc{fully\_connected}) for a fixed
-3-agent code-generation suite, scored against the MAST failure-mode taxonomy.
-\emph{(Full quantitative claims pending sweep completion.)}
+We presented a controlled $3 \times 3$ factorial study of communication
+protocol (\textsc{native}, \textsc{mcp}, \textsc{a2a}) crossed with
+organizational topology (\textsc{centralized}, \textsc{chain},
+\textsc{fully\_connected}) for a fixed 3-agent code-generation suite,
+scored against the MAST failure-mode taxonomy. At $T = 0.7$ topology has
+a statistically significant main effect on FC2 ($F(2,102) = 4.44$,
+$p = 0.014$) but protocol does not. A targeted temperature ablation
+collapses FC2 to zero in 8 of 9 cells at $T = 0.0$, indicating that the
+$T = 0.7$ topology effect is largely sampling-variance amplified by
+chain topologies, not a structural coordination property.
 
-Limitations: (i) $N_{\text{trials}} = 5$ per cell yields high variance per-trial,
-mitigated only by averaging; (ii) the protocol distinction is implemented at the
-prompt layer (envelope and capability scaffolding) rather than at the transport
-layer, so we measure how protocol \emph{prompting} influences agent behavior, not
-the impact of protocol-level transport semantics; (iii) MAST annotation is itself
-LLM-judged and inherits annotator bias.
+The single structural FC2 trigger we identify is protocol-specific:
+\textsc{mcp} $\times$ \textsc{centralized} retains FC2 = 0.25 even at
+$T = 0.0$, driven by orchestrators wrapping their own integration step
+in \texttt{<mcp:message>} envelopes and executors mis-parsing the
+partial envelopes. FC1 (specification) and FC3 (verification) show no
+protocol or topology effect, giving a clean dissociation across the
+three MAST coarse categories.
 
-Future work: replicate at $N_{\text{agents}} = 5$+ where coordination overhead
-should amplify protocol effects; replace the prompt-level protocol scaffolding with
-a real MCP/A2A transport stack; extend the MAST annotator to a multi-annotator
-agreement-checked pipeline.
+\paragraph{Limitations.}
+(i) Free-tier OpenAI rate limits forced a model-cascade fallback
+(\texttt{gpt-4.1-mini} $\to$ \texttt{gpt-4o} $\to$ \texttt{gpt-4.1} $\to$
+\texttt{gpt-4o-mini} $\to$ \texttt{gpt-4.1-nano} $\to$ \texttt{gpt-3.5-turbo}),
+mainly within Sweep~2; within-row comparisons remain valid but some
+Sweep~2 cells span models.
+(ii) $N_{\text{trials}} = 5$ per cell is small; we partially compensated
+by replicating to 7--15 trials per cell, but the headline ANOVA
+$p$-value (0.014) is still at the boundary of significance.
+(iii) The protocol distinction is implemented at the prompt layer
+(envelope and capability scaffolding) rather than at the transport
+layer; we measure how protocol \emph{prompting} influences agent
+behaviour, not the impact of real MCP/A2A transport semantics.
+(iv) MAST annotation is itself LLM-judged (\texttt{gpt-3.5-turbo}) and
+inherits annotator bias.
+
+\paragraph{Practical recommendation.}
+Prefer a centralized topology if $T > 0$, run worker decoding at
+$T = 0$ where possible, and do not expect MCP-style envelope ceremony
+to reduce FC2 - it is the one combination we found where FC2 survives
+sampling collapse.
+
+We release the harness, per-trial JSON traces under \texttt{runs/*.json},
+the analysis script, and the figures for full replication.

@@ -206,7 +206,7 @@ meaningful FC2:
 | a2a x centralized             |                       0.07 |             0.00 (5/5)     |
 | a2a x chain                   |                       0.30 |             0.00 (3/5+2c)  |
 | a2a x fully\_connected        |                       0.30 |             0.00 (2/5+3c)  |
-| mcp x centralized             |                       0.20 |             **0.40 (5/5)** |
+| mcp x centralized             |                       0.20 |             **0.25 (2/8)** |
 | mcp x chain                   |                       0.47 |             0.00 (5/5)     |
 | mcp x fully\_connected        |                       0.30 |             0.00 (3/5+2c)  |
 | native x centralized          |                       0.20 |             0.00 (5/5)     |
@@ -218,12 +218,14 @@ remove sampling and FC2 disappears, even in chain topologies that looked
 catastrophic at T=0.7. The chain-topology degradation we identified at
 T=0.7 (0.50 across 30 trials) collapses to 0.00 at T=0.0 (across 9 valid
 trials). **(b)** mcp x centralized is the exception: FC2 stays at 0.40 even
-at T=0. The MCP envelope's verbose ceremony - tool-list registry references,
-JSON-RPC framing - introduces a structural source of inter-agent
-misalignment that does *not* go away when sampling does. Inspection of
-those traces shows the orchestrator wrapping its own integration step in
-\texttt{<mcp:message>} envelopes addressed back to itself, then the executors
-parsing a partial envelope and acting on a misread.
+at T=0 (2 of 8 valid trials across four independent re-runs of this cell;
+all other 8 cells produced 0 of 5+ valid trials). The MCP envelope's verbose
+ceremony - tool-list registry references, JSON-RPC framing - introduces a
+structural source of inter-agent misalignment that does *not* go away when
+sampling does. Inspection of those traces shows the orchestrator wrapping
+its own integration step in \texttt{<mcp:message>} envelopes addressed back
+to itself, then the executors parsing a partial envelope and acting on a
+misread.
 
 This qualifies the headline ANOVA finding: topology *matters at non-zero
 temperature* through the noise it amplifies, but the protocol-specific
@@ -232,7 +234,8 @@ ceremony is what produces the rare cell where FC2 survives at T=0.
 Note that 5 of 9 T=0 cells had at least one rate-limit crash and so are
 measured on fewer than 5 trials. The valid-trial count is given in the
 table; in every case the available trials had FC2 = 0 (except the
-mcp x centralized row where FC2 = 0.40 across all 5 trials).
+mcp x centralized row where FC2 = 0.25 across 8 valid trials, pooled over
+four independent re-runs of that cell to confirm the effect).
 
 **Limitations.**
 1. Free-tier OpenAI RPD limits forced model cycling

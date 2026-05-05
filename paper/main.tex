@@ -16,15 +16,26 @@
 \maketitle
 
 \begin{abstract}
-Multi-agent LLM systems fail in characteristic ways captured by the MAST taxonomy.
-Prior work reports 41--86\% aggregate failure rates but does not isolate the
-contribution of communication protocol from organizational topology. We run a
-$3 \times 3$ factorial sweep over protocol (\textsc{native}, \textsc{mcp},
-\textsc{a2a}) and topology (\textsc{centralized}, \textsc{chain},
-\textsc{fully\_connected}) at fixed agent count and task type, and report FC1/FC2/FC3
-rates per cell. \emph{(Primary results pending sweep~1 completion.)} We test the
-hypothesis that A2A combined with a centralized topology specifically minimizes FC2
-(inter-agent misalignment) failures.
+Multi-agent LLM systems fail in characteristic ways captured by the MAST
+taxonomy~\cite{mast2024}, but prior work has not separately quantified
+the contribution of communication \emph{protocol} from organizational
+\emph{topology}. We run a $3 \times 3$ factorial sweep over protocol
+(\textsc{native}, \textsc{mcp}, \textsc{a2a}) crossed with topology
+(\textsc{centralized}, \textsc{chain}, \textsc{fully\_connected}) at fixed
+agent count $N=3$ on code-generation tasks (105 trials at $T=0.7$). We
+find that \emph{topology} has a statistically significant main effect on
+FC2 (inter-agent misalignment, $F(2,102) = 4.44$, $p = 0.014$), but
+\emph{protocol} does not ($p = 0.42$). The best cell, A2A $\times$
+centralized, attains $\text{FC2} = 0.07$ over 15 trials versus 0.53 for
+the worst (\textsc{native} $\times$ chain; Welch's $t$ = -2.62, $p = 0.017$). A
+targeted temperature ablation re-running the full grid at $T=0.0$
+collapses FC2 to exactly zero in 8 of 9 cells; only one cell
+(\textsc{mcp} $\times$ \textsc{centralized}) retains a structurally
+non-zero FC2 (0.25 over 8 valid trials), driven by orchestrators
+wrapping their own integration step in \texttt{<mcp:message>} envelopes
+and executors mis-parsing the partial envelopes. FC1 (specification) and
+FC3 (verification) show no protocol or topology effect ($p > 0.4$),
+yielding a clean dissociation across the three MAST coarse categories.
 \end{abstract}
 
 \input{sections/introduction}

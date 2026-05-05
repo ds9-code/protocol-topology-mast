@@ -16,26 +16,36 @@ from scipy import stats
 PROTOCOLS = ["native", "mcp", "a2a"]
 TOPOLOGIES = ["centralized", "chain", "fully_connected"]
 
-def load_trials():
+def load_trials(include_temp0=False, valid_only=True):
+    """Load sweep 1 trials. By default excludes T=0 cells (filename suffix _temp0*)
+    and excludes crashed trials (success=False)."""
     rows = []
     for path in sorted(glob.glob("runs/*.json")):
+        if not include_temp0 and "_temp0" in os.path.basename(path):
+            continue
         with open(path) as f: d = json.load(f)
         cfg = d["config"]
         if cfg.get("n_agents") != 3 or cfg.get("task_type") != "code":
             continue  # only sweep 1
         for t in d["trials"]:
+            if valid_only and not t["success"]:
+                continue
             rows.append({
                 "protocol": cfg["protocol"], "topology": cfg["topology"],
                 "n_agents": cfg["n_agents"], "task_type": cfg["task_type"],
                 "model": cfg.get("model"), "trial": t["i"],
                 "fc1": t["fc1"], "fc2": t["fc2"], "fc3": t["fc3"],
                 "success": t["success"], "elapsed": t.get("elapsed", 0),
+                "source": os.path.basename(path),
             })
     return pd.DataFrame(rows)
 
 def main():
-    df = load_trials()
-    print(f"# trials in sweep 1: {len(df)} from {df.groupby(['protocol','topology']).ngroups} cells")
+    # Headline analysis: T=0.7 only, all trials (crashes count as FC2=1, matching the
+    # paper's reported F(2,102) = 4.44 p = 0.014).
+    df = load_trials(include_temp0=False, valid_only=False)
+    print(f"# Sweep 1 (T=0.7, all trials incl. crashes-as-FC2): {len(df)} trials, "
+          f"{df.groupby(['protocol','topology']).ngroups} cells")
     if df.empty:
         print("no data"); return
 
@@ -120,6 +130,13 @@ def main():
     with open("analysis_summary.json","w") as f:
         json.dump(out, f, indent=2, default=str)
     print("\nwrote analysis_summary.json")
+
+    # Secondary report: T=0 cells, valid trials only
+    print("\n## Temperature ablation (T=0, valid trials only)")
+    df0 = load_trials(include_temp0=True, valid_only=True)
+    df0 = df0[df0["source"].str.contains("_temp0")]
+    if not df0.empty:
+        print(df0.groupby(["protocol","topology"])["fc2"].agg(["mean","std","count"]))
 
 if __name__ == "__main__":
     main()

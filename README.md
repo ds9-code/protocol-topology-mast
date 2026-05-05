@@ -19,9 +19,10 @@ harness — the agent program is in `program.md` and the trainable / runnable co
 - **Temperature ablation: 8 of 9 cells collapse to FC2 = 0 at temperature 0.0.** Most
   of the topology effect at T = 0.7 is sampling-variance amplification, not a structural
   coordination property.
-- The single non-zero T = 0 cell is `mcp x centralized` (FC2 ≈ 0.33-0.40), confirmed by
-  inspection of traces: the orchestrator wraps its own integration step in MCP envelopes
-  addressed back to itself, and executors mis-parse partial envelopes.
+- The single non-zero T = 0 cell is `mcp x centralized` (FC2 = 0.25 across 8 valid
+  trials pooled over four independent re-runs), confirmed by inspection of traces:
+  the orchestrator wraps its own integration step in MCP envelopes addressed back to
+  itself, and executors mis-parse partial envelopes.
 - FC1 (specification) and FC3 (verification) ANOVAs find no protocol or topology effect
   (all p > 0.4) — a clean dissociation: communication structure governs FC2 specifically.
 - Best-cell FC2 transfers from CODE → QA but collapses on PLANNING (FC2 = 1.6),

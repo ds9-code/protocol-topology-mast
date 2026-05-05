@@ -2,9 +2,14 @@
 
 \subsection{Agents and protocols}
 
-Each agent is a single OpenAI \textsc{gpt-4o-mini} chat completion seeded with a role
-system message identifying its name (\textsc{orchestrator} or \textsc{executor}\_$i$),
-the peer set, and the protocol-specific scaffolding. The three protocols differ only
+Each agent is a single OpenAI chat completion (default
+\texttt{gpt-4.1-mini}, with a model-cascade fallback to
+\texttt{gpt-4o}, \texttt{gpt-4.1}, \texttt{gpt-4o-mini},
+\texttt{gpt-4.1-nano}, and \texttt{gpt-3.5-turbo} when the per-day rate
+limit on the primary is exhausted), seeded with a role
+system message identifying its name (\textsc{orchestrator} or
+\textsc{executor}\_$i$), the peer set, and the protocol-specific
+scaffolding. The three protocols differ only
 in the system-prompt scaffolding and the message envelope used in the transcript:
 
 \begin{itemize}
@@ -35,8 +40,10 @@ in the system-prompt scaffolding and the message envelope used in the transcript
 \subsection{MAST annotation}
 
 Each trial trace (the concatenated transcript) is annotated by
-\texttt{agentdash.annotator} (model: \textsc{gpt-4o-mini}), which returns the MAST
-failure-mode dictionary\,\cite{mast2024}. We aggregate the 14 failure-mode codes into
+\texttt{agentdash.annotator} (overridden to model: \texttt{gpt-3.5-turbo}
+because the upstream default of \texttt{o1-mini} is unavailable on most
+OpenAI accounts), which returns the MAST failure-mode
+dictionary\,\cite{mast2024}. We aggregate the 14 failure-mode codes into
 the three coarse categories FC1 (\texttt{1.x}, specification issues), FC2 (\texttt{2.x},
 inter-agent misalignment), and FC3 (\texttt{3.x}, task verification). Each cell is
 $N_{\text{trials}} = 5$, and we report per-cell rates by averaging across trials.
@@ -44,6 +51,9 @@ A trial that crashes is counted as an FC2 failure (the inter-agent flow broke).
 
 \subsection{Hyperparameters held fixed}
 
-\textsc{gpt-4o-mini}, \texttt{temperature}=0.7, \texttt{max\_tokens}=400 per agent
-turn, \texttt{timeout}=60s per OpenAI call, $N_{\text{trials}}=5$. Sweep~1 holds
+Worker model defaults to \texttt{gpt-4.1-mini};
+\texttt{temperature}$=0.7$ for the headline sweep and $0.0$ for the
+ablation; \texttt{max\_tokens}=400 per agent turn; \texttt{timeout}=60s
+per OpenAI call; $N_{\text{trials}}=5$ per cell at the first pass with
+follow-up replicates to 10--15 trials. Sweep~1 holds
 $N_{\text{agents}}=3$ and \texttt{task\_type}=\textsc{code}.

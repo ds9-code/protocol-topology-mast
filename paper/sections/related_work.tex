@@ -24,3 +24,11 @@ that question empirically.
 protocol in agent-system surveys, but failure-mode-resolved comparisons are rare.
 Our $3 \times 3$ design is, to our knowledge, the first that jointly varies both
 axes under a single MAST annotator and a fixed task suite.
+
+\paragraph{ProtocolBench and SEMAP.} \cite{protocolbench2025} compares
+A2A, ACP, ANP, and Agora on aggregate success rate and latency; it
+\emph{excludes} MCP and does not vary topology. \cite{semap2025} studies
+self-evolving A2A-only stacks under a single aggregate failure rate. We
+add MCP, add the topology axis, and replace the success-rate / aggregate
+metric with the per-MAST-category breakdown — turning what was a
+benchmark into a diagnosis tool.

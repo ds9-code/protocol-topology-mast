@@ -25,3 +25,11 @@ dev/
 # Sweep stdout buffers (the actual results live in results.tsv and runs/*.json)
 sweep*.out
 *.nfs*
+
+# LaTeX build artifacts (PDF is committed)
+paper/main.aux
+paper/main.log
+paper/main.out
+paper/main.bbl
+paper/main.blg
+paper/main.toc
