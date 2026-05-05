@@ -69,14 +69,16 @@ We re-ran the entire $3 \times 3$ grid at $T = 0.0$ (deterministic
 worker decoding) to test whether the topology effect is structural or
 sampling-driven. \emph{Eight of nine cells collapse to FC2 = 0} on valid
 trials. The single exception is \textsc{mcp} $\times$
-\textsc{centralized}, which retains FC2 = 0.25 across 8 valid trials
-pooled over four independent re-runs. Trace inspection shows the
+\textsc{centralized}, which retains FC2 = 0.23 across 13 valid trials
+pooled over five independent re-runs (4 with worker = \texttt{gpt-4.1-mini},
+1 with worker = \texttt{gpt-4o} as a cross-model robustness check; FC2
+of 0.25 and 0.20 respectively). Trace inspection shows the
 orchestrator wraps its own integration step in
 \texttt{<mcp:message>} envelopes addressed back to itself, and
 executors parse only a partial envelope and act on the misread. This
-is a structural failure of the protocol, not amplified sampling
-variance, and is the cleanest reproducible MAST-FC2 trigger we
-identify.
+is a structural failure of the protocol — \emph{stable across two
+worker models} — not amplified sampling variance, and is the cleanest
+reproducible MAST-FC2 trigger we identify.
 
 \begin{figure}[h]
 \centering

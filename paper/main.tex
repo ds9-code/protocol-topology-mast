@@ -31,9 +31,11 @@ the worst (\textsc{native} $\times$ chain; Welch's $t$ = -2.62, $p = 0.017$). A
 targeted temperature ablation re-running the full grid at $T=0.0$
 collapses FC2 to exactly zero in 8 of 9 cells; only one cell
 (\textsc{mcp} $\times$ \textsc{centralized}) retains a structurally
-non-zero FC2 (0.25 over 8 valid trials), driven by orchestrators
-wrapping their own integration step in \texttt{<mcp:message>} envelopes
-and executors mis-parsing the partial envelopes. FC1 (specification) and
+non-zero FC2 (0.23 over 13 valid trials, replicated across two worker
+models, \texttt{gpt-4.1-mini} and \texttt{gpt-4o}), driven by
+orchestrators wrapping their own integration step in
+\texttt{<mcp:message>} envelopes and executors mis-parsing the
+partial envelopes. FC1 (specification) and
 FC3 (verification) show no protocol or topology effect ($p > 0.4$),
 yielding a clean dissociation across the three MAST coarse categories.
 \end{abstract}

@@ -12,10 +12,11 @@ $T = 0.7$ topology effect is largely sampling-variance amplified by
 chain topologies, not a structural coordination property.
 
 The single structural FC2 trigger we identify is protocol-specific:
-\textsc{mcp} $\times$ \textsc{centralized} retains FC2 = 0.25 even at
-$T = 0.0$, driven by orchestrators wrapping their own integration step
-in \texttt{<mcp:message>} envelopes and executors mis-parsing the
-partial envelopes. FC1 (specification) and FC3 (verification) show no
+\textsc{mcp} $\times$ \textsc{centralized} retains FC2 = 0.23 even at
+$T = 0.0$ (13 valid trials replicated across \texttt{gpt-4.1-mini} and
+\texttt{gpt-4o} workers), driven by orchestrators wrapping their own
+integration step in \texttt{<mcp:message>} envelopes and executors
+mis-parsing the partial envelopes. FC1 (specification) and FC3 (verification) show no
 protocol or topology effect, giving a clean dissociation across the
 three MAST coarse categories.
 

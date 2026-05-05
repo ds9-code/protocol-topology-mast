@@ -206,7 +206,7 @@ meaningful FC2:
 | a2a x centralized             |                       0.07 |             0.00 (5/5)     |
 | a2a x chain                   |                       0.30 |             0.00 (3/5+2c)  |
 | a2a x fully\_connected        |                       0.30 |             0.00 (2/5+3c)  |
-| mcp x centralized             |                       0.27 |             **0.25 (2/8)** |
+| mcp x centralized             |                       0.27 |             **0.23 (3/13)*** |
 | mcp x chain                   |                       0.47 |             0.00 (5/5)     |
 | mcp x fully\_connected        |                       0.30 |             0.00 (3/5+2c)  |
 | native x centralized          |                       0.20 |             0.00 (5/5)     |
@@ -234,8 +234,15 @@ ceremony is what produces the rare cell where FC2 survives at T=0.
 Note that 5 of 9 T=0 cells had at least one rate-limit crash and so are
 measured on fewer than 5 trials. The valid-trial count is given in the
 table; in every case the available trials had FC2 = 0 (except the
-mcp x centralized row where FC2 = 0.25 across 8 valid trials, pooled over
-four independent re-runs of that cell to confirm the effect).
+mcp x centralized row where FC2 = 0.23 across 13 valid trials, pooled
+over five independent re-runs and replicated across two worker models -
+gpt-4.1-mini (4 runs, FC2 = 0.25 across 8 valid) and gpt-4o (1 run,
+FC2 = 0.20 across 5 valid). The cross-model replication is what
+distinguishes this from a quirk of the gpt-4.1-mini decoder.
+
+\* The asterisk on the FC2 = 0.23 figure marks the cell as a
+cross-model-replicated structural failure rather than a single-model
+result.
 
 **Limitations.**
 1. Free-tier OpenAI RPD limits forced model cycling
