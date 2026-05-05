@@ -78,13 +78,17 @@ orchestrator wraps its own integration step in
 executors parse only a partial envelope and act on the misread. This
 is a structural failure of the protocol — \emph{stable across two
 worker models} — not amplified sampling variance, and is the cleanest
-reproducible MAST-FC2 trigger we identify. As a control, we re-ran
-both \textsc{a2a} $\times$ \textsc{centralized} and \textsc{native}
-$\times$ \textsc{centralized} at $T = 0$ with the \texttt{gpt-4o}
-worker; both stayed at FC2 = 0 (5/5 valid trials each), confirming
-that the non-zero FC2 in \textsc{mcp} $\times$ \textsc{centralized} is
-specific to the protocol, not a property of the centralized topology
-or of the \texttt{gpt-4o} worker.
+reproducible MAST-FC2 trigger we identify. As a 4-cell cross-model
+control, we re-ran \textsc{a2a} $\times$ \textsc{centralized},
+\textsc{native} $\times$ \textsc{centralized}, and \textsc{mcp}
+$\times$ \textsc{chain} at $T = 0$ with the \texttt{gpt-4o} worker;
+all three stayed at FC2 = 0 (5/5 valid trials each). The non-zero
+FC2 in \textsc{mcp} $\times$ \textsc{centralized} is therefore
+specifically attributable to the (\textsc{mcp}, \textsc{centralized})
+combination — not to the \textsc{mcp} protocol alone (chain stayed
+clean), not to the centralized topology alone (\textsc{a2a} and
+\textsc{native} stayed clean), and not to a property of the
+\texttt{gpt-4o} worker.
 
 \begin{figure}[h]
 \centering
