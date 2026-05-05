@@ -1,29 +1,29 @@
 timestamp	protocol	topology	n_agents	task_type	n_trials	fc1_rate	fc2_rate	fc3_rate	total_failures	avg_time_s	wall_time_s	status
 2026-05-05T04:19:20	a2a	centralized	2	code	5	0.000	0.000	0.000	0	50.2		ok
 2026-05-05T02:22:59	a2a	centralized	3	code	5	0.000	0.000	0.400	2	68.4		ok
+2026-05-05T05:05:58	a2a	centralized	3	code	5	0.000	0.000	0.000	0	84.9		ok
 2026-05-05T04:13:10	a2a	centralized	3	planning	5	0.400	1.600	0.400	12	69.7		ok
 2026-05-05T04:07:10	a2a	centralized	3	qa	5	0.400	0.000	0.200	3	68.7		ok
 2026-05-05T02:48:33	a2a	centralized	4	code	5	0.000	0.200	0.000	1	100.4		ok
 2026-05-05T02:55:17	a2a	centralized	5	code	5	0.000	0.400	0.000	4	79.4		ok
 2026-05-05T02:28:16	a2a	chain	3	code	5	0.000	0.400	0.200	3	61.1		ok
+2026-05-05T05:10:17	a2a	chain	3	code	5	0.000	0.200	0.000	2	50.1		ok
 2026-05-05T03:01:57	a2a	fully_connected	2	code	5	0.000	0.800	0.000	8	40.8		ok
 2026-05-05T02:34:59	a2a	fully_connected	3	code	5	0.200	0.200	0.000	2	78.3		ok
 2026-05-05T03:06:20	a2a	fully_connected	4	code	5	0.000	0.800	0.000	8	52.0		ok
 2026-05-05T03:38:38	a2a	fully_connected	5	code	5	0.000	0.000	0.000	0	138.6		ok
 2026-05-05T02:04:43	mcp	centralized	3	code	5	0.400	0.400	0.200	5	72.1		ok
+2026-05-05T04:45:34	mcp	centralized	3	code	5	0.000	0.000	0.200	1	70.4		ok
 2026-05-05T02:08:44	mcp	chain	3	code	5	0.200	0.800	0.400	9	46.6		ok
+2026-05-05T04:50:31	mcp	chain	3	code	5	0.000	0.000	0.000	0	56.9		ok
 2026-05-05T02:13:25	mcp	fully_connected	3	code	5	0.000	0.600	0.000	6	55.2		ok
+2026-05-05T04:58:24	mcp	fully_connected	3	code	5	0.000	0.000	0.200	1	88.1		ok
 2026-05-05T01:47:04	native	centralized	3	code	5	0.200	0.400	0.000	3	81.3		ok
+2026-05-05T04:27:36	native	centralized	3	code	5	0.000	0.000	0.400	2	73.1		ok
 2026-05-05T01:51:48	native	chain	3	code	5	0.000	0.800	0.400	7	55.0		ok
+2026-05-05T04:32:12	native	chain	3	code	5	0.200	0.400	0.200	4	52.5		ok
 2026-05-05T03:43:12	native	fully_connected	2	code	5	0.200	0.200	0.000	2	52.3		ok
 2026-05-05T01:58:29	native	fully_connected	3	code	5	0.000	0.200	0.000	2	78.6		ok
+2026-05-05T04:39:11	native	fully_connected	3	code	5	0.000	0.000	0.200	1	81.7		ok
 2026-05-05T03:51:21	native	fully_connected	4	code	5	0.200	0.600	0.400	6	95.6		ok
 2026-05-05T04:00:55	native	fully_connected	5	code	5	0.000	0.000	0.000	0	112.5		ok
-2026-05-05T04:27:37	native	centralized	3	code	5	0.000	0.000	0.400	2	73.1	376.6	ok
-2026-05-05T04:32:12	native	chain	3	code	5	0.200	0.400	0.200	4	52.5	275.4	ok
-2026-05-05T04:39:11	native	fully_connected	3	code	5	0.000	0.000	0.200	1	81.7	419.1	ok
-2026-05-05T04:45:34	mcp	centralized	3	code	5	0.000	0.000	0.200	1	70.4	383.1	ok
-2026-05-05T04:50:31	mcp	chain	3	code	5	0.000	0.000	0.000	0	56.9	297.2	ok
-2026-05-05T04:58:24	mcp	fully_connected	3	code	5	0.000	0.000	0.200	1	88.1	472.4	ok
-2026-05-05T05:05:58	a2a	centralized	3	code	5	0.000	0.000	0.000	0	84.9	454.6	ok
-2026-05-05T05:10:17	a2a	chain	3	code	5	0.000	0.200	0.000	2	50.1	258.3	ok

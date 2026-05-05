@@ -13,13 +13,15 @@ communication protocol versus organizational topology.
 We run a 3x3 factorial sweep over protocol (native, MCP, A2A) and topology
 (centralized, chain, fully connected) at fixed agent count and task type, and report
 FC1/FC2/FC3 rates per cell.
-**Primary result.** Across a 9-cell 3x3 grid (45 trials, gpt-4.1-nano + gpt-4.1-mini
-worker / gpt-3.5-turbo annotator), the best cell (a2a x centralized) achieves
-FC2 = 0.00 versus 0.80 for the worst cell (mcp x chain and native x chain tied).
-The hypothesis "A2A + centralized minimizes FC2" is supported descriptively;
-trial-level one-way ANOVA gives F(2,42) = 2.49, p = 0.095 for topology and
-F(2,42) = 2.23, p = 0.12 for protocol; the protocol x topology interaction is
-not significant (F(4,36) = 0.32, p = 0.86).
+**Primary result.** Across the full 9-cell 3x3 grid replicated twice (85 trials,
+gpt-4.1-nano / gpt-4.1-mini / gpt-4o-mini worker with model-cascade fallback,
+gpt-3.5-turbo annotator), the best cell (a2a x centralized) achieves
+FC2 = 0.00 over 10 trials with zero variance, versus 0.60 for the worst cell
+(native x chain). Two-way ANOVA reveals a significant main effect of topology
+on FC2 (F(2,76) = 3.67, p = 0.030); the main effect of protocol does not reach
+significance (F(2,76) = 0.98, p = 0.38) and the protocol x topology interaction
+is not significant (F(4,76) = 0.63, p = 0.65). A Welch t-test of the best vs
+worst cell yields T = -2.71, p = 0.024.
 
 ## 1. Introduction
 
@@ -105,29 +107,33 @@ ways. See Figure 5 (`figures/fig5_task_generalization.png`).
 
 ### 3.4 ANOVA
 
-We fit a two-way ANOVA on the 45 trial-level FC2 binary outcomes from
-Sweep 1, with protocol and topology as factors plus their interaction.
+After running a full replicate of Sweep 1 (CELL_SUFFIX=rep1, 8 of 9 cells
+recoverable; the 9th was lost to a fully-banned model fallback chain), we
+have 85 trial-level FC2 binary outcomes from Sweep 1. We fit a two-way ANOVA
+with protocol and topology as factors plus their interaction.
 
 | Source                    | df | sum_sq | F    | p     |
 |---------------------------|----|--------|------|-------|
-| protocol                  |  2 | 1.244  | 2.24 | 0.121 |
-| topology                  |  2 | 1.378  | 2.48 | 0.098 |
-| protocol x topology       |  4 | 0.356  | 0.32 | 0.863 |
-| residual                  | 36 | 10.000 |      |       |
+| protocol                  |  2 | 0.410  | 0.98 | 0.380 |
+| topology                  |  2 | 1.537  | 3.67 | 0.030 |
+| protocol x topology       |  4 | 0.523  | 0.63 | 0.646 |
+| residual                  | 76 | 15.900 |      |       |
 
-Both main effects trend toward significance; the interaction is not
-detectable at this sample size. A Welch t-test of the best vs worst cell
-(a2a x centralized vs native/mcp x chain) yields T = -2.14, p = 0.099,
-confirming the descriptive ranking is at the boundary of conventional
-significance with n = 5 trials per cell.
+**The main effect of topology on FC2 is significant** (p = 0.030); the main
+effect of protocol does not reach significance once both replicates are
+pooled (p = 0.38). The protocol x topology interaction remains not
+significant (p = 0.65). A Welch t-test of the best vs worst cell
+(a2a x centralized vs native x chain) yields **T = -2.71, p = 0.024**.
 
 The marginal means are clear:
-- **Protocol marginals:** a2a 0.20 < native 0.47 < mcp 0.60.
-- **Topology marginals:** centralized 0.27 < fully_connected 0.33 < chain 0.67.
+- **Protocol marginals:** a2a 0.16 < mcp 0.30 = native 0.30.
+- **Topology marginals:** centralized 0.13 < fully_connected 0.20 < chain 0.43.
 
-So both axes contribute: A2A's structured agent-card envelope reduces FC2
-compared with native and (surprisingly) with MCP, and centralized topology
-beats fully_connected and chain.
+So both axes contribute descriptively: A2A still has the lowest mean FC2
+across all 25 a2a trials, but pooling original + replicate the protocol
+gap shrinks (mcp and native tied at 0.30). Topology's gap, by contrast,
+*widens* with replication: centralized cells average 0.13 across 30 trials
+versus chain at 0.43, and the gap is statistically significant.
 
 ## 4. Discussion
 
