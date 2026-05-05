@@ -11,9 +11,9 @@ harness — the agent program is in `program.md` and the trainable / runnable co
 
 ## Headline results
 
-- 9-cell 3x3 sweep, 105 trials at temperature 0.7: **topology has a significant main
-  effect on FC2 (inter-agent misalignment)**, F(2,102) = 4.44, p = 0.014. Protocol
-  does not (p = 0.42). Best cell is `a2a x centralized` (FC2 = 0.07 over 15 trials);
+- 9-cell 3x3 sweep, 110 trials at temperature 0.7: **topology has a significant main
+  effect on FC2 (inter-agent misalignment)**, F(2,107) = 3.83, p = 0.025. Protocol
+  does not (p = 0.38). Best cell is `a2a x centralized` (FC2 = 0.07 over 15 trials);
   worst is `native x chain` (FC2 = 0.53 over 15 trials).
 - Replication-of-best-vs-worst Welch t-test: T = -2.62, p = 0.017.
 - **Temperature ablation: 8 of 9 cells collapse to FC2 = 0 at temperature 0.0.** Most

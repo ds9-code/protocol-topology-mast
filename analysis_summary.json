@@ -1,5 +1,5 @@
 {
-  "n_trials": 105,
+  "n_trials": 110,
   "per_cell": {
     "native|centralized": {
       "fc2_mean": 0.2,
@@ -23,11 +23,11 @@
       "n": 10
     },
     "mcp|centralized": {
-      "fc2_mean": 0.2,
-      "fc2_std": 0.42163702135578396,
+      "fc2_mean": 0.26666666666666666,
+      "fc2_std": 0.4577377082170635,
       "fc1_mean": 0.2,
       "fc3_mean": 0.2,
-      "n": 10
+      "n": 15
     },
     "mcp|chain": {
       "fc2_mean": 0.4666666666666667,
@@ -67,27 +67,27 @@
   },
   "marginal_protocol_fc2": {
     "a2a": 0.2,
-    "mcp": 0.34285714285714286,
+    "mcp": 0.35,
     "native": 0.3142857142857143
   },
   "marginal_topology_fc2": {
-    "centralized": 0.14285714285714285,
+    "centralized": 0.175,
     "chain": 0.45,
     "fully_connected": 0.23333333333333334
   },
   "marginal_protocol_fc1": {
     "a2a": 0.02857142857142857,
-    "mcp": 0.08571428571428572,
+    "mcp": 0.1,
     "native": 0.08571428571428572
   },
   "marginal_topology_fc1": {
-    "centralized": 0.08571428571428572,
+    "centralized": 0.1,
     "chain": 0.075,
     "fully_connected": 0.03333333333333333
   },
   "marginal_protocol_fc3": {
     "a2a": 0.11428571428571428,
-    "mcp": 0.14285714285714285,
+    "mcp": 0.15,
     "native": 0.2571428571428571
   },
   "marginal_topology_fc3": {

@@ -5,14 +5,14 @@ We hold $N_{\text{agents}} = 3$ and \texttt{task\_type} = \textsc{code} and
 run the full $3 \times 3$ factorial design at $T = 0.7$. Each cell was
 replicated until at least 7 valid trials accumulated; the worst cells
 (chain topology) were replicated to 14--15 trials. After replication the
-sweep contains 105 trials in total (some valid, some rate-limit crashes;
+sweep contains 110 trials in total (some valid, some rate-limit crashes;
 crashes are conservatively counted as FC2 failures since the inter-agent
 flow broke). Table~\ref{tab:sweep1} reports per-cell FC2 means and
 Figure~\ref{fig:fc2_heatmap} visualises them as a heatmap.
 
 \begin{table}[h]
 \centering
-\caption{Sweep~1 FC2 rates by cell (105 trials at $T=0.7$, $N=3$, code).
+\caption{Sweep~1 FC2 rates by cell (110 trials at $T=0.7$, $N=3$, code).
 Lower is better. Cell counts are valid trials.}
 \label{tab:sweep1}
 \begin{tabular}{llcc}
@@ -22,7 +22,7 @@ Protocol & Topology & FC2 & $n$ \\
 \textsc{a2a}    & \textsc{centralized}      & \textbf{0.07} & 15 \\
 \textsc{a2a}    & \textsc{chain}            & 0.30 & 10 \\
 \textsc{a2a}    & \textsc{fully\_connected} & 0.30 & 10 \\
-\textsc{mcp}    & \textsc{centralized}      & 0.20 & 10 \\
+\textsc{mcp}    & \textsc{centralized}      & 0.27 & 15 \\
 \textsc{mcp}    & \textsc{chain}            & 0.47 & 15 \\
 \textsc{mcp}    & \textsc{fully\_connected} & 0.30 & 10 \\
 \textsc{native} & \textsc{centralized}      & 0.20 & 10 \\
@@ -40,11 +40,11 @@ Protocol & Topology & FC2 & $n$ \\
 \end{figure}
 
 \paragraph{ANOVA.} A trial-level one-way ANOVA on FC2 reveals a
-significant main effect of \emph{topology} ($F(2,102) = 4.44$,
-$p = 0.014$); the main effect of \emph{protocol} does not reach
-significance ($F(2,102) = 0.89$, $p = 0.42$). A two-way ANOVA confirms
-this dissociation: topology $p = 0.025$, protocol $p = 0.65$,
-interaction $p = 0.63$. Welch's $t$-test contrasting the best cell
+significant main effect of \emph{topology} ($F(2,107) = 3.83$,
+$p = 0.025$); the main effect of \emph{protocol} does not reach
+significance ($F(2,107) = 0.99$, $p = 0.38$). A two-way ANOVA confirms
+this dissociation: topology $p = 0.036$, protocol $p = 0.50$,
+interaction $p = 0.60$. Welch's $t$-test contrasting the best cell
 (\textsc{a2a} $\times$ \textsc{centralized}) against the worst
 (\textsc{native} $\times$ \textsc{chain}) is significant: $t = -2.62$,
 $p = 0.017$. FC1 and FC3 show no protocol or topology effect

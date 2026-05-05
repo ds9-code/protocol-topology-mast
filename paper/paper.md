@@ -13,13 +13,13 @@ communication protocol versus organizational topology.
 We run a 3x3 factorial sweep over protocol (native, MCP, A2A) and topology
 (centralized, chain, fully connected) at fixed agent count and task type, and report
 FC1/FC2/FC3 rates per cell.
-**Primary result at T = 0.7.** Across the full 9-cell 3x3 grid (105 trials,
+**Primary result at T = 0.7.** Across the full 9-cell 3x3 grid (110 trials,
 10-15 per cell, gpt-4.1-nano / gpt-4.1-mini / gpt-4o-mini worker with
 model-cascade fallback, gpt-3.5-turbo annotator), the best cell
 (a2a x centralized) achieves FC2 = 0.07 over 15 trials, versus 0.53 for the
 worst cell (native x chain, 15 trials). One-way ANOVA on FC2 by topology
-reveals a significant main effect (F(2,102) = 4.44, **p = 0.014**); the
-main effect of protocol does not (F(2,102) = 0.89, p = 0.42). A Welch
+reveals a significant main effect (F(2,107) = 3.83, **p = 0.025**); the
+main effect of protocol does not (F(2,107) = 0.99, p = 0.38). A Welch
 t-test of the best vs worst cell yields T = -2.62, **p = 0.017**.
 
 **Reframing at T = 0.0.** A targeted temperature ablation re-running 4 of the
@@ -148,10 +148,10 @@ versus chain at 0.43.
 **Hypothesis verdict.** The hypothesis that *A2A + centralized minimizes FC2*
 is supported descriptively: a2a x centralized has the lowest mean FC2 at
 T = 0.7 (0.07 over 15 trials). After replication, *topology* has a
-statistically significant main effect on FC2 (p = 0.014) at T = 0.7,
+statistically significant main effect on FC2 (p = 0.025) at T = 0.7,
 driven by chain being a poor topology (FC2 = 0.50) compared to centralized
 (FC2 = 0.16). The *protocol* main effect is not significant once
-replicates are pooled (p = 0.42).
+replicates are pooled (p = 0.38).
 
 **But the temperature ablation reframes the result.** When we re-ran 4
 cells at T = 0.0, FC2 collapsed to zero across all of them. This implies
@@ -206,7 +206,7 @@ meaningful FC2:
 | a2a x centralized             |                       0.07 |             0.00 (5/5)     |
 | a2a x chain                   |                       0.30 |             0.00 (3/5+2c)  |
 | a2a x fully\_connected        |                       0.30 |             0.00 (2/5+3c)  |
-| mcp x centralized             |                       0.20 |             **0.25 (2/8)** |
+| mcp x centralized             |                       0.27 |             **0.25 (2/8)** |
 | mcp x chain                   |                       0.47 |             0.00 (5/5)     |
 | mcp x fully\_connected        |                       0.30 |             0.00 (3/5+2c)  |
 | native x centralized          |                       0.20 |             0.00 (5/5)     |
@@ -255,7 +255,7 @@ four independent re-runs of that cell to confirm the effect).
 In a controlled 3x3 factorial study of communication protocol crossed with
 organizational topology, holding agent count and task type fixed at
 T = 0.7, topology has a statistically significant main effect on FC2
-(F(2,102) = 4.44, p = 0.014) but protocol does not. A targeted temperature
+(F(2,107) = 3.83, p = 0.025) but protocol does not. A targeted temperature
 ablation reveals that FC2 collapses to zero across all four measured cells
 at T = 0.0, indicating that most of the variation we measured at T = 0.7
 is sampling-variance amplified by topology rather than a structural
