@@ -1,0 +1,83 @@
+{
+  "config": {
+    "protocol": "a2a",
+    "topology": "chain",
+    "n_agents": 3,
+    "task_type": "code",
+    "n_trials": 5,
+    "model": "gpt-4.1-mini",
+    "annot_model": "gpt-3.5-turbo"
+  },
+  "summary": {
+    "fc1_rate": 0.2,
+    "fc2_rate": 0.4,
+    "fc3_rate": 0.2,
+    "total_failures": 6,
+    "avg_time": 45.04052057266235,
+    "crash_total": 2
+  },
+  "trials": [
+    {
+      "i": 0,
+      "task": "Write a Python function that finds all prime numbers up to N",
+      "elapsed": 31.52852964401245,
+      "success": true,
+      "fc1": 1,
+      "fc2": 0,
+      "fc3": 1,
+      "ids": [
+        "1.5",
+        "3.1"
+      ],
+      "err": null
+    },
+    {
+      "i": 1,
+      "task": "Write a function that merges two sorted lists into one sorte",
+      "elapsed": 49.930933713912964,
+      "success": true,
+      "fc1": 0,
+      "fc2": 0,
+      "fc3": 0,
+      "ids": [],
+      "err": null
+    },
+    {
+      "i": 2,
+      "task": "Write a function that detects cycles in a linked list.",
+      "elapsed": 53.574503660202026,
+      "success": true,
+      "fc1": 0,
+      "fc2": 0,
+      "fc3": 0,
+      "ids": [],
+      "err": null
+    },
+    {
+      "i": 3,
+      "task": "Write a Python function that finds all prime numbers up to N",
+      "elapsed": 90.16854906082153,
+      "success": false,
+      "fc1": 0,
+      "fc2": 1,
+      "fc3": 0,
+      "ids": [
+        "CRASH"
+      ],
+      "err": "Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-3.5-turbo in organization org-nk7zhzom2pOXZ4RL6JKJvTd1 on requests per day (RPD): Limit 200, Used 200, Requested 1. Please try again in 7m12s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing.', 'type': 'requests', 'param': None, 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "i": 4,
+      "task": "Write a function that merges two sorted lists into one sorte",
+      "elapsed": 8.678436279296875e-05,
+      "success": false,
+      "fc1": 0,
+      "fc2": 1,
+      "fc3": 0,
+      "ids": [
+        "CRASH"
+      ],
+      "err": "no models available"
+    }
+  ]
+}
