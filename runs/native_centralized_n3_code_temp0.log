@@ -1,0 +1,31 @@
+!! gpt-4.1-mini still RPM-limited after retries, trying next
+Trial 1/5 done in 41.6s success=True fc1=0 fc2=0 fc3=0 ids=[]
+!! RPD-banning gpt-4.1-mini, trying next fallback
+!! gpt-4o still RPM-limited after retries, trying next
+Trial 2/5 done in 51.9s success=True fc1=0 fc2=0 fc3=0 ids=[]
+!! gpt-4o still RPM-limited after retries, trying next
+!! gpt-4o still RPM-limited after retries, trying next
+Trial 3/5 done in 53.2s success=True fc1=0 fc2=0 fc3=0 ids=[]
+!! RPD-banning gpt-4o, trying next fallback
+Trial 4/5 done in 67.4s success=True fc1=0 fc2=0 fc3=0 ids=[]
+!! gpt-4.1 still RPM-limited after retries, trying next
+!! gpt-4.1 still RPM-limited after retries, trying next
+!! RPD-banning gpt-4.1, trying next fallback
+Trial 5/5 done in 108.1s success=True fc1=0 fc2=0 fc3=0 ids=[]
+result: FC2_rate=0.000 FC1_rate=0.000 FC3_rate=0.000 total_failures=0 avg_time=64.4s protocol=native topology=centralized n_agents=3 task=code
+
+--- STDERR ---
+Could not find mode 1.1 in response
+Could not find mode 1.2 in response
+Could not find mode 1.3 in response
+Could not find mode 1.4 in response
+Could not find mode 1.5 in response
+Could not find mode 2.1 in response
+Could not find mode 2.2 in response
+Could not find mode 2.3 in response
+Could not find mode 2.4 in response
+Could not find mode 2.5 in response
+Could not find mode 2.6 in response
+Could not find mode 3.1 in response
+Could not find mode 3.2 in response
+Could not find mode 3.3 in response
