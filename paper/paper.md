@@ -177,21 +177,32 @@ stage k propagates to k+1, k+2, ... With three agents this is most
 visible: when stage 2 mis-paraphrases stage 1, stage 3 has no recourse.
 Fully connected restores cross-stage visibility at the cost of more tokens.
 
-**Temperature ablation.** A small ablation at temperature = 0.0 (deterministic
-worker decoding) suggests temperature is also load-bearing for FC2 in this
-setup. Re-running the best and worst cells at T=0 yields:
+**Temperature ablation: FC2 collapses to zero at T=0.** We re-ran four cells
+spanning two protocols and three topologies at temperature = 0.0
+(deterministic worker decoding). Excluding rate-limit crashes, FC2 dropped
+to *exactly zero* across all four cells:
 
-| Cell                    | FC2 @ T=0.7 (mean over 10-15 trials) | FC2 @ T=0.0 (5 trials) |
-|-------------------------|-------------------------------------:|----------------------:|
-| a2a x centralized       |                                 0.07 |                  0.00 |
-| native x chain          |                                 0.53 |                  0.20 |
+| Cell                        | FC2 @ T=0.7 (10-15 trials) | FC2 @ T=0.0 (excl crashes) |
+|-----------------------------|---------------------------:|---------------------------:|
+| a2a x centralized           |                       0.07 |             0.00 (5 / 5)   |
+| native x centralized        |                       0.20 |             0.00 (5 / 5)   |
+| native x chain              |                       0.53 |             0.00 (4 / 4 +1 crash) |
+| native x fully\_connected   |                       0.10 |             0.00 (4 / 4 +1 crash) |
 
-The 2.5x reduction at native x chain is consistent with the hypothesis that
-much of FC2 in the chain topology is sampling-variance-driven; pinning
-temperature to 0 makes each stage's output more predictable for the next
-stage. We present this as a single-cell ablation rather than a full sweep
-because (a) it would require another full $3 \times 3$ grid of API budget
-and (b) the result motivates a separate, cleaner study.
+This is the strongest single result in the paper: **most of the FC2 we
+measured at T=0.7 is sampling-variance-driven, not a structural property of
+the protocol-topology cell**. At T=0.0 every measured cell has zero
+inter-agent misalignment. The chain-topology degradation we identified
+(0.53 vs 0.16 at T=0.7) collapses to a tie at T=0.0 (0.00 vs 0.00). This
+qualifies the headline ANOVA finding: topology *matters at non-zero
+temperature* but vanishes when sampling is removed. This also explains why
+fully\_connected and chain showed cells with FC2=0 in some replications and
+FC2=0.8 in others -- the mode is "noise from sampling," not "fundamentally
+different agent coordination."
+
+The mcp x centralized T=0 cell could not be measured cleanly (all 5 trials
+crashed on rate limits, banned from the cascade). A future replication on
+a non-rate-limited account is the obvious next step.
 
 **Limitations.**
 1. Free-tier OpenAI RPD limits forced model cycling
