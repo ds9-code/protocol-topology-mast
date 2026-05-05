@@ -1,0 +1,19 @@
+!! RPD-banning gpt-4.1-mini, trying next fallback
+!! RPD-banning gpt-4o, trying next fallback
+!! gpt-4.1 still RPM-limited after retries, trying next
+MAST annotation failed: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o-mini in organization org-nk7zhzom2pOXZ4RL6JKJvTd1 on requests per min (RPM): Limit 3, Used 3, Requested 1. Please try again in 20s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing.', 'type': 'requests', 'param': None, 'code': 'rate_limit_exceeded'}}
+Trial 1/5 done in 59.9s success=True fc1=0 fc2=0 fc3=0 ids=[]
+!! gpt-4.1 still RPM-limited after retries, trying next
+!! gpt-4o-mini still RPM-limited after retries, trying next
+!! RPD-banning gpt-4.1-nano, trying next fallback
+!! RPD-banning gpt-3.5-turbo, trying next fallback
+Trial 2/5 done in 25.8s success=False fc1=0 fc2=1 fc3=0 ids=['CRASH']
+!! RPD-banning gpt-4.1, trying next fallback
+!! RPD-banning gpt-4o-mini, trying next fallback
+Trial 3/5 done in 44.9s success=False fc1=0 fc2=1 fc3=0 ids=['CRASH']
+Trial 4/5 done in 0.0s success=False fc1=0 fc2=1 fc3=0 ids=['CRASH']
+Trial 5/5 done in 0.0s success=False fc1=0 fc2=1 fc3=0 ids=['CRASH']
+result: FC2_rate=0.800 FC1_rate=0.000 FC3_rate=0.000 total_failures=8 avg_time=26.1s protocol=mcp topology=centralized n_agents=3 task=code
+
+--- STDERR ---
+OpenAI API error: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o-mini in organization org-nk7zhzom2pOXZ4RL6JKJvTd1 on requests per min (RPM): Limit 3, Used 3, Requested 1. Please try again in 20s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing.', 'type': 'requests', 'param': None, 'code': 'rate_limit_exceeded'}}
