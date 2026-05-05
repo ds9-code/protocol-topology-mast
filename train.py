@@ -110,9 +110,11 @@ def _call_with_fallback(messages, fallbacks, max_tokens, temperature=0.7):
             raise
     raise last_err if last_err else RuntimeError("no models available")
 
+TEMPERATURE = float(os.environ.get("TEMPERATURE", "0.7"))
+
 def call_agent(role, history, protocol, n_agents, model=None, max_tokens=400):
     msgs = [{"role": "system", "content": system_message(role, n_agents, protocol)}] + history
-    out, used = _call_with_fallback(msgs, WORKER_FALLBACKS, max_tokens=max_tokens)
+    out, used = _call_with_fallback(msgs, WORKER_FALLBACKS, max_tokens=max_tokens, temperature=TEMPERATURE)
     return out
 
 def envelope(protocol, sender, recipient, body):
