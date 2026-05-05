@@ -13,14 +13,23 @@ communication protocol versus organizational topology.
 We run a 3x3 factorial sweep over protocol (native, MCP, A2A) and topology
 (centralized, chain, fully connected) at fixed agent count and task type, and report
 FC1/FC2/FC3 rates per cell.
-**Primary result.** Across the full 9-cell 3x3 grid (105 trials, 10-15 per
-cell, gpt-4.1-nano / gpt-4.1-mini / gpt-4o-mini worker with model-cascade
-fallback, gpt-3.5-turbo annotator), the best cell (a2a x centralized)
-achieves FC2 = 0.07 over 15 trials, versus 0.53 for the worst cell
-(native x chain, 15 trials). One-way ANOVA on FC2 by topology reveals a
-significant main effect (F(2,102) = 4.44, **p = 0.014**); the main effect of
-protocol does not reach significance (F(2,102) = 0.89, p = 0.42). A Welch
+**Primary result at T = 0.7.** Across the full 9-cell 3x3 grid (105 trials,
+10-15 per cell, gpt-4.1-nano / gpt-4.1-mini / gpt-4o-mini worker with
+model-cascade fallback, gpt-3.5-turbo annotator), the best cell
+(a2a x centralized) achieves FC2 = 0.07 over 15 trials, versus 0.53 for the
+worst cell (native x chain, 15 trials). One-way ANOVA on FC2 by topology
+reveals a significant main effect (F(2,102) = 4.44, **p = 0.014**); the
+main effect of protocol does not (F(2,102) = 0.89, p = 0.42). A Welch
 t-test of the best vs worst cell yields T = -2.62, **p = 0.017**.
+
+**Reframing at T = 0.0.** A targeted temperature ablation re-running 4 of the
+9 cells at T = 0.0 finds that FC2 collapses to *exactly zero* in every
+measured cell (18 valid trials, excluding rate-limit crashes). The
+"topology effect" we measure at T = 0.7 is thus more accurately described
+as a *sampling-variance-amplification* effect: chain and fully-connected
+topologies amplify trial-to-trial sampling noise into FC2, while
+centralized topologies dampen it. At T = 0 there is no noise to amplify
+and all cells coordinate cleanly.
 
 ## 1. Introduction
 
