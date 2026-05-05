@@ -1,0 +1,8 @@
+Trial 1/5 done in 21.6s success=False fc1=0 fc2=1 fc3=0 ids=['CRASH']
+Trial 2/5 done in 106.7s success=True fc1=0 fc2=0 fc3=0 ids=[]
+Trial 3/5 done in 40.3s success=False fc1=0 fc2=1 fc3=0 ids=['CRASH']
+Trial 4/5 done in 26.3s success=False fc1=0 fc2=1 fc3=0 ids=['CRASH']
+Trial 5/5 done in 65.0s success=False fc1=0 fc2=1 fc3=0 ids=['CRASH']
+result: FC2_rate=0.800 FC1_rate=0.000 FC3_rate=0.000 total_failures=8 avg_time=52.0s protocol=a2a topology=fully_connected n_agents=4 task=code
+
+--- STDERR ---
