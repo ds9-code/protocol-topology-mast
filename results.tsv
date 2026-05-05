@@ -17,9 +17,11 @@ timestamp	protocol	topology	n_agents	task_type	n_trials	fc1_rate	fc2_rate	fc3_ra
 2026-05-05T03:38:38	a2a	fully_connected	5	code	5	0.000	0.000	0.000	0	138.6		ok
 2026-05-05T02:04:43	mcp	centralized	3	code	5	0.400	0.400	0.200	5	72.1		ok
 2026-05-05T04:45:34	mcp	centralized	3	code	5	0.000	0.000	0.200	1	70.4		ok
+2026-05-05T11:26:07	mcp	centralized	3	code	5	0.000	0.400	0.000	2	77.6		ok
 2026-05-05T02:08:44	mcp	chain	3	code	5	0.200	0.800	0.400	9	46.6		ok
 2026-05-05T04:50:31	mcp	chain	3	code	5	0.000	0.000	0.000	0	56.9		ok
 2026-05-05T07:42:01	mcp	chain	3	code	5	0.000	0.600	0.000	6	46.3		ok
+2026-05-05T11:30:50	mcp	chain	3	code	5	0.000	0.000	0.000	0	50.7		ok
 2026-05-05T02:13:25	mcp	fully_connected	3	code	5	0.000	0.600	0.000	6	55.2		ok
 2026-05-05T04:58:24	mcp	fully_connected	3	code	5	0.000	0.000	0.200	1	88.1		ok
 2026-05-05T01:47:04	native	centralized	3	code	5	0.200	0.400	0.000	3	81.3		ok
@@ -35,5 +37,3 @@ timestamp	protocol	topology	n_agents	task_type	n_trials	fc1_rate	fc2_rate	fc3_ra
 2026-05-05T10:13:17	native	fully_connected	3	code	5	0.000	0.200	0.000	2	70.7		ok
 2026-05-05T03:51:21	native	fully_connected	4	code	5	0.200	0.600	0.400	6	95.6		ok
 2026-05-05T04:00:55	native	fully_connected	5	code	5	0.000	0.000	0.000	0	112.5		ok
-2026-05-05T11:26:07	mcp	centralized	3	code	5	0.000	0.400	0.000	2	77.6	398.7	ok
-2026-05-05T11:30:50	mcp	chain	3	code	5	0.000	0.000	0.000	0	50.7	283.0	ok

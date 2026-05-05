@@ -195,32 +195,40 @@ stage k propagates to k+1, k+2, ... With three agents this is most
 visible: when stage 2 mis-paraphrases stage 1, stage 3 has no recourse.
 Fully connected restores cross-stage visibility at the cost of more tokens.
 
-**Temperature ablation: FC2 collapses to zero at T=0.** We re-ran four cells
-spanning two protocols and three topologies at temperature = 0.0
-(deterministic worker decoding). Excluding rate-limit crashes, FC2 dropped
-to *exactly zero* across all four cells:
+**Temperature ablation: FC2 collapses for almost every cell at T=0.** We
+re-ran six cells spanning all three protocols and all three topologies at
+temperature = 0.0 (deterministic worker decoding). Excluding rate-limit
+crashes, FC2 dropped to *exactly zero* in five of the six cells; only one
+cell (mcp x centralized) retained meaningful FC2:
 
 | Cell                        | FC2 @ T=0.7 (10-15 trials) | FC2 @ T=0.0 (excl crashes) |
 |-----------------------------|---------------------------:|---------------------------:|
 | a2a x centralized           |                       0.07 |             0.00 (5 / 5)   |
 | native x centralized        |                       0.20 |             0.00 (5 / 5)   |
+| mcp x centralized           |                       0.20 |             **0.40** (5 / 5) |
 | native x chain              |                       0.53 |             0.00 (4 / 4 +1 crash) |
+| mcp x chain                 |                       0.50 |             0.00 (5 / 5)   |
 | native x fully\_connected   |                       0.10 |             0.00 (4 / 4 +1 crash) |
 
-This is the strongest single result in the paper: **most of the FC2 we
-measured at T=0.7 is sampling-variance-driven, not a structural property of
-the protocol-topology cell**. At T=0.0 every measured cell has zero
-inter-agent misalignment. The chain-topology degradation we identified
-(0.53 vs 0.16 at T=0.7) collapses to a tie at T=0.0 (0.00 vs 0.00). This
-qualifies the headline ANOVA finding: topology *matters at non-zero
-temperature* but vanishes when sampling is removed. This also explains why
-fully\_connected and chain showed cells with FC2=0 in some replications and
-FC2=0.8 in others -- the mode is "noise from sampling," not "fundamentally
-different agent coordination."
+Two findings: **(a)** for most cells, FC2 at T=0.7 is sampling-variance-driven:
+remove sampling and FC2 disappears, even in chain topologies that looked
+catastrophic at T=0.7. The chain-topology degradation we identified at
+T=0.7 (0.50 across 30 trials) collapses to 0.00 at T=0.0 (across 9 valid
+trials). **(b)** mcp x centralized is the exception: FC2 stays at 0.40 even
+at T=0. The MCP envelope's verbose ceremony - tool-list registry references,
+JSON-RPC framing - introduces a structural source of inter-agent
+misalignment that does *not* go away when sampling does. Inspection of
+those traces shows the orchestrator wrapping its own integration step in
+\texttt{<mcp:message>} envelopes addressed back to itself, then the executors
+parsing a partial envelope and acting on a misread.
 
-The mcp x centralized T=0 cell could not be measured cleanly (all 5 trials
-crashed on rate limits, banned from the cascade). A future replication on
-a non-rate-limited account is the obvious next step.
+This qualifies the headline ANOVA finding: topology *matters at non-zero
+temperature* through the noise it amplifies, but the protocol-specific
+ceremony is what produces the rare cell where FC2 survives at T=0.
+
+A2A x chain, A2A x fully\_connected, and MCP x fully\_connected at T=0
+could not be measured cleanly within remaining quota; future replication
+on a non-rate-limited account would round out this grid.
 
 **Limitations.**
 1. Free-tier OpenAI RPD limits forced model cycling
