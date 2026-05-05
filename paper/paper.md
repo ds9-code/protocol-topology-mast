@@ -13,15 +13,15 @@ communication protocol versus organizational topology.
 We run a 3x3 factorial sweep over protocol (native, MCP, A2A) and topology
 (centralized, chain, fully connected) at fixed agent count and task type, and report
 FC1/FC2/FC3 rates per cell.
-**Primary result.** Across the full 9-cell 3x3 grid replicated twice (85 trials,
-gpt-4.1-nano / gpt-4.1-mini / gpt-4o-mini worker with model-cascade fallback,
-gpt-3.5-turbo annotator), the best cell (a2a x centralized) achieves
-FC2 = 0.00 over 10 trials with zero variance, versus 0.60 for the worst cell
-(native x chain). Two-way ANOVA reveals a significant main effect of topology
-on FC2 (F(2,76) = 3.67, p = 0.030); the main effect of protocol does not reach
-significance (F(2,76) = 0.98, p = 0.38) and the protocol x topology interaction
-is not significant (F(4,76) = 0.63, p = 0.65). A Welch t-test of the best vs
-worst cell yields T = -2.71, p = 0.024.
+**Primary result.** Across the full 9-cell 3x3 grid balanced at 10 trials per
+cell (90 trials, gpt-4.1-nano / gpt-4.1-mini / gpt-4o-mini worker with
+model-cascade fallback, gpt-3.5-turbo annotator), the best cell
+(a2a x centralized) achieves FC2 = 0.00 over 10 trials with zero variance,
+versus 0.60 for the worst cell (native x chain). Two-way ANOVA reveals a
+significant main effect of topology on FC2 (F(2,81) = 3.30, p = 0.042); the
+main effect of protocol does not reach significance (F(2,81) = 0.47, p = 0.63)
+and the protocol x topology interaction is not significant (F(4,81) = 0.94,
+p = 0.44). A Welch t-test of the best vs worst cell yields T = -2.71, p = 0.024.
 
 ## 1. Introduction
 
@@ -107,33 +107,33 @@ ways. See Figure 5 (`figures/fig5_task_generalization.png`).
 
 ### 3.4 ANOVA
 
-After running a full replicate of Sweep 1 (CELL_SUFFIX=rep1, 8 of 9 cells
-recoverable; the 9th was lost to a fully-banned model fallback chain), we
-have 85 trial-level FC2 binary outcomes from Sweep 1. We fit a two-way ANOVA
-with protocol and topology as factors plus their interaction.
+After running a full replicate of Sweep 1 (CELL_SUFFIX=rep1) plus a targeted
+fill of one cell (CELL_SUFFIX=rep4), we have 90 trial-level FC2 binary
+outcomes from Sweep 1, balanced at 10 trials per cell. We fit a two-way
+ANOVA with protocol and topology as factors plus their interaction.
 
 | Source                    | df | sum_sq | F    | p     |
 |---------------------------|----|--------|------|-------|
-| protocol                  |  2 | 0.410  | 0.98 | 0.380 |
-| topology                  |  2 | 1.537  | 3.67 | 0.030 |
-| protocol x topology       |  4 | 0.523  | 0.63 | 0.646 |
-| residual                  | 76 | 15.900 |      |       |
+| protocol                  |  2 | 0.200  | 0.47 | 0.626 |
+| topology                  |  2 | 1.400  | 3.30 | 0.042 |
+| protocol x topology       |  4 | 0.800  | 0.94 | 0.444 |
+| residual                  | 81 | 17.200 |      |       |
 
-**The main effect of topology on FC2 is significant** (p = 0.030); the main
-effect of protocol does not reach significance once both replicates are
-pooled (p = 0.38). The protocol x topology interaction remains not
-significant (p = 0.65). A Welch t-test of the best vs worst cell
+**The main effect of topology on FC2 is significant** (p = 0.042); the
+main effect of protocol does not reach significance once replicates are
+pooled (p = 0.63). The protocol x topology interaction is not significant
+(p = 0.44). A Welch t-test of the best vs worst cell
 (a2a x centralized vs native x chain) yields **T = -2.71, p = 0.024**.
 
 The marginal means are clear:
-- **Protocol marginals:** a2a 0.16 < mcp 0.30 = native 0.30.
-- **Topology marginals:** centralized 0.13 < fully_connected 0.20 < chain 0.43.
+- **Protocol marginals:** a2a 0.20 < mcp 0.30 = native 0.30.
+- **Topology marginals:** centralized 0.13 < fully_connected 0.23 < chain 0.43.
 
 So both axes contribute descriptively: A2A still has the lowest mean FC2
-across all 25 a2a trials, but pooling original + replicate the protocol
-gap shrinks (mcp and native tied at 0.30). Topology's gap, by contrast,
-*widens* with replication: centralized cells average 0.13 across 30 trials
-versus chain at 0.43, and the gap is statistically significant.
+across all 30 a2a trials, but pooling original + replicate the protocol
+gap shrinks (mcp and native tied at 0.30). Topology's gap remains
+statistically significant: centralized cells average 0.13 across 30 trials
+versus chain at 0.43.
 
 ## 4. Discussion
 
