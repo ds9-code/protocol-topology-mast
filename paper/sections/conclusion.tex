@@ -27,14 +27,18 @@ three MAST coarse categories.
 mainly within Sweep~2; within-row comparisons remain valid but some
 Sweep~2 cells span models.
 (ii) $N_{\text{trials}} = 5$ per cell is small; we partially compensated
-by replicating to 7--15 trials per cell, but the headline ANOVA
-$p$-value (0.014) is still at the boundary of significance.
+by replicating to 10--15 trials per cell, but the headline ANOVA
+$p$-value (0.025) is still at the boundary of significance.
 (iii) The protocol distinction is implemented at the prompt layer
 (envelope and capability scaffolding) rather than at the transport
 layer; we measure how protocol \emph{prompting} influences agent
 behaviour, not the impact of real MCP/A2A transport semantics.
 (iv) MAST annotation is itself LLM-judged (\texttt{gpt-3.5-turbo}) and
-inherits annotator bias.
+inherits annotator bias; in spot checks with \texttt{gpt-4o-mini} as
+the annotator we found a few traces relabelled (typically dropping a
+2.x code that gpt-3.5-turbo had flagged), so absolute rates are
+annotator-sensitive even though within-sweep comparisons remain
+internally consistent.
 
 \paragraph{Practical recommendation.}
 Prefer a centralized topology if $T > 0$, run worker decoding at
