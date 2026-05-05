@@ -1,0 +1,2 @@
+timestamp	protocol	topology	n_agents	task_type	n_trials	fc1_rate	fc2_rate	fc3_rate	total_failures	avg_time_s	wall_time_s	status
+2026-05-05T01:07:37	native	centralized	3	code	5	0.600	0.600	0.600	9	77.2	467.0	ok
