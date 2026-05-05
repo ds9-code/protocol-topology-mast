@@ -16,8 +16,22 @@ N_AGENTS  = int(os.environ.get("N_AGENTS", "3"))         # 2-6
 TASK_TYPE = os.environ.get("TASK_TYPE", "code")          # "code" | "qa" | "planning"
 N_TRIALS  = int(os.environ.get("N_TRIALS", "5"))
 
-WORKER_MODEL = os.environ.get("WORKER_MODEL", "gpt-4.1-nano")
+WORKER_MODEL = os.environ.get("WORKER_MODEL", "gpt-4.1-mini")
 ANNOT_MODEL  = os.environ.get("ANNOT_MODEL",  "gpt-3.5-turbo")
+# Free-tier accounts hit RPD limits. We cascade through equivalent small models so the
+# sweep keeps making progress instead of spending an entire cell crashing on 429s.
+WORKER_FALLBACKS = [WORKER_MODEL, "gpt-4.1-mini", "gpt-4o", "gpt-4.1",
+                    "gpt-4o-mini", "gpt-4.1-nano", "gpt-3.5-turbo"]
+ANNOT_FALLBACKS  = [ANNOT_MODEL,  "gpt-3.5-turbo", "gpt-4.1-mini", "gpt-4o-mini"]
+# de-duplicate while preserving order
+def _uniq(seq):
+    seen = set(); out = []
+    for x in seq:
+        if x not in seen: out.append(x); seen.add(x)
+    return out
+WORKER_FALLBACKS = _uniq(WORKER_FALLBACKS)
+ANNOT_FALLBACKS  = _uniq(ANNOT_FALLBACKS)
+_RPD_BANNED = set()  # models we know are exhausted within this run
 
 TASKS = {
     "code": [
@@ -72,12 +86,34 @@ def system_message(role, n_agents, protocol):
         f"If you are an executor, finish your part and clearly mark when you are done."
     )
 
-def call_agent(role, history, protocol, n_agents, model=WORKER_MODEL, max_tokens=400):
+def _call_with_fallback(messages, fallbacks, max_tokens, temperature=0.7):
+    last_err = None
+    for m in fallbacks:
+        if m in _RPD_BANNED: continue
+        try:
+            resp = client.chat.completions.create(
+                model=m, messages=messages, max_tokens=max_tokens,
+                temperature=temperature, timeout=60,
+            )
+            return resp.choices[0].message.content.strip(), m
+        except Exception as e:
+            last_err = e
+            es = str(e)
+            if "RPD" in es or ("requests per day" in es) or ("rate_limit_exceeded" in es and "Limit 200" in es):
+                _RPD_BANNED.add(m)
+                print(f"!! RPD-banning {m}, trying next fallback", flush=True)
+                continue
+            if "429" in es:
+                # Per-minute rate limit - the OpenAI client already retried; if still 429, try next model
+                print(f"!! {m} still RPM-limited after retries, trying next", flush=True)
+                continue
+            raise
+    raise last_err if last_err else RuntimeError("no models available")
+
+def call_agent(role, history, protocol, n_agents, model=None, max_tokens=400):
     msgs = [{"role": "system", "content": system_message(role, n_agents, protocol)}] + history
-    resp = client.chat.completions.create(
-        model=model, messages=msgs, max_tokens=max_tokens, temperature=0.7, timeout=60,
-    )
-    return resp.choices[0].message.content.strip()
+    out, used = _call_with_fallback(msgs, WORKER_FALLBACKS, max_tokens=max_tokens)
+    return out
 
 def envelope(protocol, sender, recipient, body):
     if protocol == "a2a":
