@@ -1,0 +1,78 @@
+{
+  "config": {
+    "protocol": "native",
+    "topology": "fully_connected",
+    "n_agents": 3,
+    "task_type": "code",
+    "n_trials": 5,
+    "model": "gpt-4.1-mini",
+    "annot_model": "gpt-3.5-turbo"
+  },
+  "summary": {
+    "fc1_rate": 0.0,
+    "fc2_rate": 0.0,
+    "fc3_rate": 0.2,
+    "total_failures": 1,
+    "avg_time": 81.70255284309387,
+    "crash_total": 0
+  },
+  "trials": [
+    {
+      "i": 0,
+      "task": "Write a Python function that finds all prime numbers up to N",
+      "elapsed": 50.85000562667847,
+      "success": true,
+      "fc1": 0,
+      "fc2": 0,
+      "fc3": 0,
+      "ids": [],
+      "err": null
+    },
+    {
+      "i": 1,
+      "task": "Write a function that merges two sorted lists into one sorte",
+      "elapsed": 87.17264199256897,
+      "success": true,
+      "fc1": 0,
+      "fc2": 0,
+      "fc3": 1,
+      "ids": [
+        "3.3"
+      ],
+      "err": null
+    },
+    {
+      "i": 2,
+      "task": "Write a function that detects cycles in a linked list.",
+      "elapsed": 90.51206088066101,
+      "success": true,
+      "fc1": 0,
+      "fc2": 0,
+      "fc3": 0,
+      "ids": [],
+      "err": null
+    },
+    {
+      "i": 3,
+      "task": "Write a Python function that finds all prime numbers up to N",
+      "elapsed": 47.276641607284546,
+      "success": true,
+      "fc1": 0,
+      "fc2": 0,
+      "fc3": 0,
+      "ids": [],
+      "err": null
+    },
+    {
+      "i": 4,
+      "task": "Write a function that merges two sorted lists into one sorte",
+      "elapsed": 132.70141410827637,
+      "success": true,
+      "fc1": 0,
+      "fc2": 0,
+      "fc3": 0,
+      "ids": [],
+      "err": null
+    }
+  ]
+}
