@@ -26,3 +26,4 @@ timestamp	protocol	topology	n_agents	task_type	n_trials	fc1_rate	fc2_rate	fc3_ra
 2026-05-05T04:50:31	mcp	chain	3	code	5	0.000	0.000	0.000	0	56.9	297.2	ok
 2026-05-05T04:58:24	mcp	fully_connected	3	code	5	0.000	0.000	0.200	1	88.1	472.4	ok
 2026-05-05T05:05:58	a2a	centralized	3	code	5	0.000	0.000	0.000	0	84.9	454.6	ok
+2026-05-05T05:10:17	a2a	chain	3	code	5	0.000	0.200	0.000	2	50.1	258.3	ok
