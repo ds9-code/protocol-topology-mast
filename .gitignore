@@ -19,5 +19,8 @@ AGENTS.md
 # Experimental code/artifacts
 dev/
 
-# Results file
-results.tsv
+# Claude Code session artifacts
+.claude/
+
+# Sweep stdout buffers (the actual results live in results.tsv and runs/*.json)
+sweep*.out
