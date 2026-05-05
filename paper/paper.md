@@ -177,6 +177,22 @@ stage k propagates to k+1, k+2, ... With three agents this is most
 visible: when stage 2 mis-paraphrases stage 1, stage 3 has no recourse.
 Fully connected restores cross-stage visibility at the cost of more tokens.
 
+**Temperature ablation.** A small ablation at temperature = 0.0 (deterministic
+worker decoding) suggests temperature is also load-bearing for FC2 in this
+setup. Re-running the best and worst cells at T=0 yields:
+
+| Cell                    | FC2 @ T=0.7 (mean over 10-15 trials) | FC2 @ T=0.0 (5 trials) |
+|-------------------------|-------------------------------------:|----------------------:|
+| a2a x centralized       |                                 0.07 |                  0.00 |
+| native x chain          |                                 0.53 |                  0.20 |
+
+The 2.5x reduction at native x chain is consistent with the hypothesis that
+much of FC2 in the chain topology is sampling-variance-driven; pinning
+temperature to 0 makes each stage's output more predictable for the next
+stage. We present this as a single-cell ablation rather than a full sweep
+because (a) it would require another full $3 \times 3$ grid of API budget
+and (b) the result motivates a separate, cleaner study.
+
 **Limitations.**
 1. Free-tier OpenAI RPD limits forced model cycling
    (gpt-4.1-nano, gpt-4.1-mini, gpt-4o-mini) within a single sweep, mainly
