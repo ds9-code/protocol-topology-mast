@@ -1,0 +1,50 @@
+{
+  "n_rows": 9,
+  "per_cell": {
+    "a2a|centralized": {
+      "mean": 0.0,
+      "std": null,
+      "count": 1
+    },
+    "a2a|chain": {
+      "mean": 0.4,
+      "std": null,
+      "count": 1
+    },
+    "a2a|fully_connected": {
+      "mean": 0.2,
+      "std": null,
+      "count": 1
+    },
+    "mcp|centralized": {
+      "mean": 0.4,
+      "std": null,
+      "count": 1
+    },
+    "mcp|chain": {
+      "mean": 0.8,
+      "std": null,
+      "count": 1
+    },
+    "mcp|fully_connected": {
+      "mean": 0.6,
+      "std": null,
+      "count": 1
+    },
+    "native|centralized": {
+      "mean": 0.4,
+      "std": null,
+      "count": 1
+    },
+    "native|chain": {
+      "mean": 0.8,
+      "std": null,
+      "count": 1
+    },
+    "native|fully_connected": {
+      "mean": 0.2,
+      "std": null,
+      "count": 1
+    }
+  }
+}

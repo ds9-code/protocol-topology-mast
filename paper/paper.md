@@ -51,7 +51,7 @@ failure rate per cell.
 | mcp | fully_connected | 0.00 | 0.60 | 0.00 | 6 | 55.2 |
 | a2a | centralized | 0.00 | 0.00 | 0.40 | 2 | 68.4 |
 | a2a | chain | 0.00 | 0.40 | 0.20 | 3 | 61.1 |
-| a2a | fully_connected | RESULT | RESULT | RESULT | RESULT | RESULT |
+| a2a | fully_connected | 0.20 | 0.20 | 0.00 | 2 | 78.3 |
 <!-- END-SWEEP1-TABLE -->
 
 See `figures/fig1_fc2_heatmap.png`.
