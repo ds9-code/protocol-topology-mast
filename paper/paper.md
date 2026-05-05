@@ -48,7 +48,7 @@ failure rate per cell.
 | native | fully_connected | 0.00 | 0.20 | 0.00 | 2 | 78.6 |
 | mcp | centralized | 0.40 | 0.40 | 0.20 | 5 | 72.1 |
 | mcp | chain | 0.20 | 0.80 | 0.40 | 9 | 46.6 |
-| mcp | fully_connected | RESULT | RESULT | RESULT | RESULT | RESULT |
+| mcp | fully_connected | 0.00 | 0.60 | 0.00 | 6 | 55.2 |
 | a2a | centralized | RESULT | RESULT | RESULT | RESULT | RESULT |
 | a2a | chain | RESULT | RESULT | RESULT | RESULT | RESULT |
 | a2a | fully_connected | RESULT | RESULT | RESULT | RESULT | RESULT |
