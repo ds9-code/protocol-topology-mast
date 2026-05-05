@@ -1,6 +1,6 @@
 # Protocol x Topology x MAST: How Communication Structure Shapes Multi-Agent Failure Modes
 
-**Author:** Diya Sreedhar (Mzitnik Lab, Harvard)
+**Author:** Anonymous (FAGEN @ ICML 2026 submission, double-blind)
 **Date:** 2026-05-05
 **Workshop deadline:** 2026-05-08
 
