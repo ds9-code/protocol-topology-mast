@@ -1,0 +1,21 @@
+!! gpt-4.1-mini still RPM-limited after retries, trying next
+!! RPD-banning gpt-4.1-mini, trying next fallback
+!! RPD-banning gpt-4o, trying next fallback
+Trial 1/5 done in 30.0s success=True fc1=0 fc2=0 fc3=0 ids=[]
+!! RPD-banning gpt-4.1, trying next fallback
+!! gpt-4o-mini still RPM-limited after retries, trying next
+Trial 2/5 done in 48.9s success=True fc1=0 fc2=0 fc3=0 ids=[]
+!! gpt-4o-mini still RPM-limited after retries, trying next
+!! RPD-banning gpt-4.1-nano, trying next fallback
+!! gpt-4o-mini still RPM-limited after retries, trying next
+Trial 3/5 done in 68.9s success=True fc1=0 fc2=0 fc3=0 ids=[]
+!! gpt-4o-mini still RPM-limited after retries, trying next
+!! gpt-4o-mini still RPM-limited after retries, trying next
+Trial 4/5 done in 70.4s success=True fc1=0 fc2=0 fc3=0 ids=[]
+!! gpt-4o-mini still RPM-limited after retries, trying next
+!! gpt-4o-mini still RPM-limited after retries, trying next
+!! gpt-4o-mini still RPM-limited after retries, trying next
+Trial 5/5 done in 66.4s success=True fc1=0 fc2=0 fc3=0 ids=[]
+result: FC2_rate=0.000 FC1_rate=0.000 FC3_rate=0.000 total_failures=0 avg_time=56.9s protocol=mcp topology=chain n_agents=3 task=code
+
+--- STDERR ---
