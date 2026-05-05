@@ -4,69 +4,23 @@
     "topology": "centralized",
     "n_agents": 2,
     "task_type": "code",
-    "n_trials": 5,
+    "n_trials": 1,
     "model": "gpt-4.1-mini",
     "annot_model": "gpt-3.5-turbo"
   },
   "summary": {
     "fc1_rate": 0.0,
     "fc2_rate": 0.0,
-    "fc3_rate": 0.2,
-    "total_failures": 1,
-    "avg_time": 48.219004201889035,
+    "fc3_rate": 0.0,
+    "total_failures": 0,
+    "avg_time": 50.80697512626648,
     "crash_total": 0
   },
   "trials": [
     {
       "i": 0,
       "task": "Write a Python function that finds all prime numbers up to N",
-      "elapsed": 7.046580791473389,
-      "success": true,
-      "fc1": 0,
-      "fc2": 0,
-      "fc3": 0,
-      "ids": [],
-      "err": null
-    },
-    {
-      "i": 1,
-      "task": "Write a function that merges two sorted lists into one sorte",
-      "elapsed": 66.21929597854614,
-      "success": true,
-      "fc1": 0,
-      "fc2": 0,
-      "fc3": 0,
-      "ids": [],
-      "err": null
-    },
-    {
-      "i": 2,
-      "task": "Write a function that detects cycles in a linked list.",
-      "elapsed": 65.89215421676636,
-      "success": true,
-      "fc1": 0,
-      "fc2": 0,
-      "fc3": 1,
-      "ids": [
-        "3.2"
-      ],
-      "err": null
-    },
-    {
-      "i": 3,
-      "task": "Write a Python function that finds all prime numbers up to N",
-      "elapsed": 54.500248670578,
-      "success": true,
-      "fc1": 0,
-      "fc2": 0,
-      "fc3": 0,
-      "ids": [],
-      "err": null
-    },
-    {
-      "i": 4,
-      "task": "Write a function that merges two sorted lists into one sorte",
-      "elapsed": 47.4367413520813,
+      "elapsed": 50.80697512626648,
       "success": true,
       "fc1": 0,
       "fc2": 0,

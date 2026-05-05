@@ -10,3 +10,4 @@ timestamp	protocol	topology	n_agents	task_type	n_trials	fc1_rate	fc2_rate	fc3_ra
 2026-05-05T02:34:59	a2a	fully_connected	3	code	5	0.200	0.200	0.000	2	78.3	402.7	ok
 2026-05-05T03:01:57	a2a	fully_connected	2	code	5	0.000	0.800	0.000	8	40.8	206.5	ok
 2026-05-05T03:06:20	a2a	fully_connected	4	code	5	0.000	0.800	0.000	8	52.0	262.6	ok
+2026-05-05T03:38:38	a2a	fully_connected	5	code	5	0.000	0.000	0.000	0	138.6	704.1	ok

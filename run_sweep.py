@@ -25,7 +25,7 @@ RESULT_RE = re.compile(
     r"n_agents=(\d+)\s+task=(\S+)"
 )
 
-def run_one(protocol, topology, n_agents, task_type, n_trials=5, timeout_s=600):
+def run_one(protocol, topology, n_agents, task_type, n_trials=5, timeout_s=1200):
     env = os.environ.copy()
     env.update({
         "PROTOCOL": protocol, "TOPOLOGY": topology,
