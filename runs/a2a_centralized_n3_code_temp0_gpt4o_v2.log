@@ -1,0 +1,19 @@
+MAST annotation failed: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o-mini in organization org-nk7zhzom2pOXZ4RL6JKJvTd1 on requests per day (RPD): Limit 200, Used 200, Requested 1. Please try again in 7m12s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing.', 'type': 'requests', 'param': None, 'code': 'rate_limit_exceeded'}}
+Trial 1/5 done in 34.4s success=True fc1=0 fc2=0 fc3=0 ids=[]
+!! gpt-4o still RPM-limited after retries, trying next
+!! RPD-banning gpt-4.1-mini, trying next fallback
+!! RPD-banning gpt-4o, trying next fallback
+!! gpt-4.1 still RPM-limited after retries, trying next
+Trial 2/5 done in 121.8s success=True fc1=1 fc2=0 fc3=0 ids=['1.4']
+Trial 3/5 done in 54.0s success=True fc1=0 fc2=0 fc3=1 ids=['3.2']
+!! gpt-4.1 still RPM-limited after retries, trying next
+MAST annotation failed: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o-mini in organization org-nk7zhzom2pOXZ4RL6JKJvTd1 on requests per min (RPM): Limit 3, Used 3, Requested 1. Please try again in 20s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing.', 'type': 'requests', 'param': None, 'code': 'rate_limit_exceeded'}}
+Trial 4/5 done in 105.8s success=True fc1=0 fc2=0 fc3=0 ids=[]
+!! RPD-banning gpt-4.1, trying next fallback
+!! RPD-banning gpt-4o-mini, trying next fallback
+Trial 5/5 done in 72.9s success=True fc1=0 fc2=0 fc3=0 ids=[]
+result: FC2_rate=0.000 FC1_rate=0.200 FC3_rate=0.200 total_failures=2 avg_time=77.8s protocol=a2a topology=centralized n_agents=3 task=code
+
+--- STDERR ---
+OpenAI API error: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o-mini in organization org-nk7zhzom2pOXZ4RL6JKJvTd1 on requests per day (RPD): Limit 200, Used 200, Requested 1. Please try again in 7m12s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing.', 'type': 'requests', 'param': None, 'code': 'rate_limit_exceeded'}}
+OpenAI API error: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o-mini in organization org-nk7zhzom2pOXZ4RL6JKJvTd1 on requests per min (RPM): Limit 3, Used 3, Requested 1. Please try again in 20s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing.', 'type': 'requests', 'param': None, 'code': 'rate_limit_exceeded'}}

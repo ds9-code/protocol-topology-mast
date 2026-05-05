@@ -8,12 +8,14 @@ Before running any experiments, set up the GitHub repo and paper structure:
 
 ```bash
 gh repo create $GITHUB_USERNAME/protocol-topology-mast --private --source=. --remote=origin --push
-mkdir -p paper/sections figures
+mkdir -p paper/sections figures .github/workflows
 touch paper/paper.md paper/main.tex paper/references.bib figures/.gitkeep
 touch paper/sections/introduction.tex paper/sections/related_work.tex
 touch paper/sections/method.tex paper/sections/experiments.tex paper/sections/conclusion.tex
+# GitHub Actions workflow - auto-compiles LaTeX to PDF on every push
+cp ~/cluster_files_temp/github_workflows/build_paper.yml .github/workflows/build_paper.yml
 git add .
-git commit -m "add paper structure and figures folder"
+git commit -m "add paper structure, figures folder, and PDF build workflow"
 git push origin main
 ```
 
