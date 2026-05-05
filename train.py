@@ -16,7 +16,7 @@ N_AGENTS  = int(os.environ.get("N_AGENTS", "3"))         # 2-6
 TASK_TYPE = os.environ.get("TASK_TYPE", "code")          # "code" | "qa" | "planning"
 N_TRIALS  = int(os.environ.get("N_TRIALS", "5"))
 
-WORKER_MODEL = os.environ.get("WORKER_MODEL", "gpt-4.1-mini")
+WORKER_MODEL = os.environ.get("WORKER_MODEL", "gpt-4o-mini")
 ANNOT_MODEL  = os.environ.get("ANNOT_MODEL",  "gpt-3.5-turbo")
 
 TASKS = {
