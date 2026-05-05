@@ -2,3 +2,4 @@ timestamp	protocol	topology	n_agents	task_type	n_trials	fc1_rate	fc2_rate	fc3_ra
 2026-05-05T01:47:04	native	centralized	3	code	5	0.200	0.400	0.000	3	81.3	417.8	ok
 2026-05-05T01:51:48	native	chain	3	code	5	0.000	0.800	0.400	7	55.0	283.9	ok
 2026-05-05T01:58:29	native	fully_connected	3	code	5	0.000	0.200	0.000	2	78.6	401.6	ok
+2026-05-05T02:04:43	mcp	centralized	3	code	5	0.400	0.400	0.200	5	72.1	373.7	ok

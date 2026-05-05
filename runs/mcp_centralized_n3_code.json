@@ -1,0 +1,84 @@
+{
+  "config": {
+    "protocol": "mcp",
+    "topology": "centralized",
+    "n_agents": 3,
+    "task_type": "code",
+    "n_trials": 5,
+    "model": "gpt-4.1-nano",
+    "annot_model": "gpt-3.5-turbo"
+  },
+  "summary": {
+    "fc1_rate": 0.4,
+    "fc2_rate": 0.4,
+    "fc3_rate": 0.2,
+    "total_failures": 5,
+    "avg_time": 72.13572735786438,
+    "crash_total": 0
+  },
+  "trials": [
+    {
+      "i": 0,
+      "task": "Write a Python function that finds all prime numbers up to N",
+      "elapsed": 23.13616394996643,
+      "success": true,
+      "fc1": 1,
+      "fc2": 0,
+      "fc3": 1,
+      "ids": [
+        "1.5",
+        "3.1"
+      ],
+      "err": null
+    },
+    {
+      "i": 1,
+      "task": "Write a function that merges two sorted lists into one sorte",
+      "elapsed": 102.92837119102478,
+      "success": true,
+      "fc1": 0,
+      "fc2": 1,
+      "fc3": 0,
+      "ids": [
+        "2.3"
+      ],
+      "err": null
+    },
+    {
+      "i": 2,
+      "task": "Write a function that detects cycles in a linked list.",
+      "elapsed": 85.24658465385437,
+      "success": true,
+      "fc1": 0,
+      "fc2": 0,
+      "fc3": 0,
+      "ids": [],
+      "err": null
+    },
+    {
+      "i": 3,
+      "task": "Write a Python function that finds all prime numbers up to N",
+      "elapsed": 83.80799221992493,
+      "success": true,
+      "fc1": 1,
+      "fc2": 1,
+      "fc3": 0,
+      "ids": [
+        "1.4",
+        "2.3"
+      ],
+      "err": null
+    },
+    {
+      "i": 4,
+      "task": "Write a function that merges two sorted lists into one sorte",
+      "elapsed": 65.55952477455139,
+      "success": true,
+      "fc1": 0,
+      "fc2": 0,
+      "fc3": 0,
+      "ids": [],
+      "err": null
+    }
+  ]
+}
