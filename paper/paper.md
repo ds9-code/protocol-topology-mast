@@ -196,19 +196,22 @@ visible: when stage 2 mis-paraphrases stage 1, stage 3 has no recourse.
 Fully connected restores cross-stage visibility at the cost of more tokens.
 
 **Temperature ablation: FC2 collapses for almost every cell at T=0.** We
-re-ran six cells spanning all three protocols and all three topologies at
-temperature = 0.0 (deterministic worker decoding). Excluding rate-limit
-crashes, FC2 dropped to *exactly zero* in five of the six cells; only one
-cell (mcp x centralized) retained meaningful FC2:
+re-ran the **full 3x3 grid** at temperature = 0.0 (deterministic worker
+decoding). Excluding rate-limit crashes, FC2 dropped to *exactly zero* in
+**eight of the nine cells**; only one cell (mcp x centralized) retained
+meaningful FC2:
 
-| Cell                        | FC2 @ T=0.7 (10-15 trials) | FC2 @ T=0.0 (excl crashes) |
-|-----------------------------|---------------------------:|---------------------------:|
-| a2a x centralized           |                       0.07 |             0.00 (5 / 5)   |
-| native x centralized        |                       0.20 |             0.00 (5 / 5)   |
-| mcp x centralized           |                       0.20 |             **0.40** (5 / 5) |
-| native x chain              |                       0.53 |             0.00 (4 / 4 +1 crash) |
-| mcp x chain                 |                       0.50 |             0.00 (5 / 5)   |
-| native x fully\_connected   |                       0.10 |             0.00 (4 / 4 +1 crash) |
+| Cell                          | FC2 @ T=0.7 (10-15 trials) | FC2 @ T=0.0 (valid / total) |
+|-------------------------------|---------------------------:|---------------------------:|
+| a2a x centralized             |                       0.07 |             0.00 (5/5)     |
+| a2a x chain                   |                       0.30 |             0.00 (3/5+2c)  |
+| a2a x fully\_connected        |                       0.30 |             0.00 (2/5+3c)  |
+| mcp x centralized             |                       0.20 |             **0.40 (5/5)** |
+| mcp x chain                   |                       0.47 |             0.00 (5/5)     |
+| mcp x fully\_connected        |                       0.30 |             0.00 (3/5+2c)  |
+| native x centralized          |                       0.20 |             0.00 (5/5)     |
+| native x chain                |                       0.53 |             0.00 (4/5+1c)  |
+| native x fully\_connected     |                       0.10 |             0.00 (4/5+1c)  |
 
 Two findings: **(a)** for most cells, FC2 at T=0.7 is sampling-variance-driven:
 remove sampling and FC2 disappears, even in chain topologies that looked
@@ -226,9 +229,10 @@ This qualifies the headline ANOVA finding: topology *matters at non-zero
 temperature* through the noise it amplifies, but the protocol-specific
 ceremony is what produces the rare cell where FC2 survives at T=0.
 
-A2A x chain, A2A x fully\_connected, and MCP x fully\_connected at T=0
-could not be measured cleanly within remaining quota; future replication
-on a non-rate-limited account would round out this grid.
+Note that 5 of 9 T=0 cells had at least one rate-limit crash and so are
+measured on fewer than 5 trials. The valid-trial count is given in the
+table; in every case the available trials had FC2 = 0 (except the
+mcp x centralized row where FC2 = 0.40 across all 5 trials).
 
 **Limitations.**
 1. Free-tier OpenAI RPD limits forced model cycling
