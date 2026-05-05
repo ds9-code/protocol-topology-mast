@@ -1,50 +1,60 @@
 {
-  "n_rows": 9,
+  "n_trials": 45,
   "per_cell": {
-    "a2a|centralized": {
-      "mean": 0.0,
-      "std": null,
-      "count": 1
-    },
-    "a2a|chain": {
-      "mean": 0.4,
-      "std": null,
-      "count": 1
-    },
-    "a2a|fully_connected": {
-      "mean": 0.2,
-      "std": null,
-      "count": 1
-    },
-    "mcp|centralized": {
-      "mean": 0.4,
-      "std": null,
-      "count": 1
-    },
-    "mcp|chain": {
-      "mean": 0.8,
-      "std": null,
-      "count": 1
-    },
-    "mcp|fully_connected": {
-      "mean": 0.6,
-      "std": null,
-      "count": 1
-    },
     "native|centralized": {
       "mean": 0.4,
-      "std": null,
-      "count": 1
+      "std": 0.5477225575051662,
+      "n": 5
     },
     "native|chain": {
       "mean": 0.8,
-      "std": null,
-      "count": 1
+      "std": 0.8366600265340756,
+      "n": 5
     },
     "native|fully_connected": {
       "mean": 0.2,
-      "std": null,
-      "count": 1
+      "std": 0.447213595499958,
+      "n": 5
+    },
+    "mcp|centralized": {
+      "mean": 0.4,
+      "std": 0.5477225575051662,
+      "n": 5
+    },
+    "mcp|chain": {
+      "mean": 0.8,
+      "std": 0.44721359549995804,
+      "n": 5
+    },
+    "mcp|fully_connected": {
+      "mean": 0.6,
+      "std": 0.5477225575051662,
+      "n": 5
+    },
+    "a2a|centralized": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 5
+    },
+    "a2a|chain": {
+      "mean": 0.4,
+      "std": 0.5477225575051662,
+      "n": 5
+    },
+    "a2a|fully_connected": {
+      "mean": 0.2,
+      "std": 0.44721359549995804,
+      "n": 5
     }
+  },
+  "marginal_protocol": {
+    "a2a": 0.2,
+    "mcp": 0.6,
+    "native": 0.4666666666666667
+  },
+  "marginal_topology": {
+    "centralized": 0.26666666666666666,
+    "chain": 0.6666666666666666,
+    "fully_connected": 0.3333333333333333
   }
 }
