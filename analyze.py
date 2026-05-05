@@ -78,17 +78,44 @@ def main():
     except Exception as e:
         print(f"\n(skip two-way: {e})")
 
+    # FC1 and FC3 analysis
+    print("\n## FC1 (specification) marginals")
+    print(df.groupby("protocol")["fc1"].agg(["mean","std","count"]))
+    print(df.groupby("topology")["fc1"].agg(["mean","std","count"]))
+    if len(groups_p := [df[df.protocol==p]["fc1"].values for p in PROTOCOLS if (df.protocol==p).any()]) >= 2:
+        F, p = stats.f_oneway(*groups_p)
+        print(f"FC1 ~ protocol: F={F:.3f} p={p:.4f}")
+    if len(groups_t := [df[df.topology==t]["fc1"].values for t in TOPOLOGIES if (df.topology==t).any()]) >= 2:
+        F, p = stats.f_oneway(*groups_t)
+        print(f"FC1 ~ topology: F={F:.3f} p={p:.4f}")
+
+    print("\n## FC3 (verification) marginals")
+    print(df.groupby("protocol")["fc3"].agg(["mean","std","count"]))
+    print(df.groupby("topology")["fc3"].agg(["mean","std","count"]))
+    if len(groups_p := [df[df.protocol==p]["fc3"].values for p in PROTOCOLS if (df.protocol==p).any()]) >= 2:
+        F, p = stats.f_oneway(*groups_p)
+        print(f"FC3 ~ protocol: F={F:.3f} p={p:.4f}")
+    if len(groups_t := [df[df.topology==t]["fc3"].values for t in TOPOLOGIES if (df.topology==t).any()]) >= 2:
+        F, p = stats.f_oneway(*groups_t)
+        print(f"FC3 ~ topology: F={F:.3f} p={p:.4f}")
+
     # Save summary
     out = {
         "n_trials": int(len(df)),
         "per_cell": {f"{p}|{t}": {
-                        "mean": float(df[(df.protocol==p)&(df.topology==t)]["fc2"].mean()),
-                        "std":  float(df[(df.protocol==p)&(df.topology==t)]["fc2"].std()),
+                        "fc2_mean": float(df[(df.protocol==p)&(df.topology==t)]["fc2"].mean()),
+                        "fc2_std":  float(df[(df.protocol==p)&(df.topology==t)]["fc2"].std()),
+                        "fc1_mean": float(df[(df.protocol==p)&(df.topology==t)]["fc1"].mean()),
+                        "fc3_mean": float(df[(df.protocol==p)&(df.topology==t)]["fc3"].mean()),
                         "n":    int(((df.protocol==p)&(df.topology==t)).sum()),
                     } for p in PROTOCOLS for t in TOPOLOGIES
                     if ((df.protocol==p)&(df.topology==t)).any()},
-        "marginal_protocol": df.groupby("protocol")["fc2"].mean().to_dict(),
-        "marginal_topology": df.groupby("topology")["fc2"].mean().to_dict(),
+        "marginal_protocol_fc2": df.groupby("protocol")["fc2"].mean().to_dict(),
+        "marginal_topology_fc2": df.groupby("topology")["fc2"].mean().to_dict(),
+        "marginal_protocol_fc1": df.groupby("protocol")["fc1"].mean().to_dict(),
+        "marginal_topology_fc1": df.groupby("topology")["fc1"].mean().to_dict(),
+        "marginal_protocol_fc3": df.groupby("protocol")["fc3"].mean().to_dict(),
+        "marginal_topology_fc3": df.groupby("topology")["fc3"].mean().to_dict(),
     }
     with open("analysis_summary.json","w") as f:
         json.dump(out, f, indent=2, default=str)

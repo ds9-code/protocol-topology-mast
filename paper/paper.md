@@ -149,13 +149,28 @@ and A2A's structured envelope helps marginally on top.* The interaction
 term is small and not significant.
 
 **Why does MCP underperform native?** A natural prediction is that MCP's
-JSON-RPC envelope and tool registry should reduce ambiguity. Instead MCP has
-the highest mean FC2 (0.60). Inspection of traces suggests that the
-prompt-level MCP scaffolding adds verbose ceremony ("invoking tool X",
-JSON wrapping) that consumes attention and crowds out the actual
-task content, *especially in the chain topology* where the next stage has
-to parse the wrapped envelope. We do not implement an actual MCP transport;
-this finding may not transfer to a true MCP server-client implementation.
+JSON-RPC envelope and tool registry should reduce ambiguity. Instead in the
+unreplicated Sweep 1, MCP had the highest mean FC2 (0.60); after replication
+mcp tied native at 0.30. Inspection of traces suggests that the prompt-level
+MCP scaffolding adds verbose ceremony ("invoking tool X", JSON wrapping)
+that consumes attention and crowds out the actual task content, *especially
+in the chain topology* where the next stage has to parse the wrapped
+envelope. We do not implement an actual MCP transport; this finding may not
+transfer to a true MCP server-client implementation.
+
+**FC2 is the affected axis, not FC1 or FC3.** Repeating the same trial-level
+ANOVA on FC1 (specification issues) and FC3 (verification failures) yields
+no significant effects: FC1 ~ protocol p = 0.69, FC1 ~ topology p = 0.69,
+FC3 ~ protocol p = 0.77, FC3 ~ topology p = 0.46. This is a clean dissociation:
+*choice of protocol and topology specifically affects inter-agent
+misalignment, not specification or verification*. The marginal means for
+FC1 and FC3 are all in the 0.04--0.20 range across all 9 cells, with no
+visible structure. So the right framing for practitioners is: "if your
+agents are well-specified and verified individually, the protocol /
+topology choice is what governs whether they can coordinate." This adds
+support to the MAST taxonomy's three-category coarse split: the categories
+behave like statistically independent failure axes, at least with respect
+to communication-structure perturbations.
 
 **Why does chain underperform fully_connected?** A chain's bandwidth is
 narrow: each stage sees only the previous stage's output, so any drift in
