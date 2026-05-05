@@ -17,9 +17,46 @@ git commit -m "add paper structure and figures folder"
 git push origin main
 ```
 
+## Target Workshop
+FAGEN - Failure Modes in Agentic AI (ICML 2026). Deadline: May 8, 2026 AOE.
+Website: https://fagen-workshop.github.io/
+Submission portal: https://openreview.net/group?id=ICML.cc/2026/Workshop/FMAI
+Non-archival. Dual submission allowed. Best Paper Award available.
+Notification: May 15, 2026.
+
+## Submission Requirements (follow exactly)
+- Page limit: 8 pages excluding references and appendix
+- Template: ICML 2026 - https://media.icml.cc/Conferences/ICML2026/Styles/icml2026.zip
+- Anonymization: not stated on site - write as double-blind to be safe (no author names)
+- Dual submission: explicitly allowed
+
+## What FAGEN Wants (read before writing every section)
+Papers must address at least one of:
+- Reproducible triggers or minimal reproductions of failure modes
+- Comparable evaluation protocols or trace-level diagnostics
+- Mitigation strategies with explicit evidence of efficacy
+- Well-documented negative results with careful analysis and transferable lessons
+Frame the paper as: "protocol x topology combinations are reproducible triggers for
+specific MAST failure categories." This is not just a benchmark - it is a diagnosis tool.
+
+## Competitors to Cite and Differentiate From
+- ProtocolBench (arXiv 2510.17149, ICLR 2026): compares A2A/ACP/ANP/Agora on success +
+  latency. Explicitly EXCLUDES MCP. No topology variation. No failure taxonomy.
+  Our paper: adds MCP, adds topology, uses MAST categories not aggregate success rate.
+- MAST / "Why Do Multi-Agent LLM Systems Fail?" (arXiv 2503.13657): builds FC1/FC2/FC3
+  taxonomy from observational traces. Purely observational, never manipulates protocol
+  or topology. Our paper: turns MAST from observational to experimental.
+- SEMAP (arXiv 2510.12120): A2A only, aggregate failure rate only, no topology variation.
+
 ## Research Goal
-Measure how protocol (native/MCP/A2A) and topology (centralized/chain/fully_connected)
-interact to produce different MAST failure mode distributions.
+Characterize how communication protocol (native/MCP/A2A) and topology
+(centralized/chain/fully_connected) act as reproducible triggers for specific
+MAST failure categories (FC1 system design, FC2 inter-agent misalignment,
+FC3 task verification).
+
+Key claim: the interaction effect of protocol x topology on per-category failure rates
+is uncharacterized and predictive. ProtocolBench measures success/latency only.
+MAST itself is observational. We make it experimental.
 
 Hypothesis: A2A + centralized minimizes FC2 (Inter-Agent Misalignment) specifically.
 
@@ -30,6 +67,8 @@ Primary metric: FC2_rate (lower is better). Track all three: FC1, FC2, FC3.
 
 ## Baseline
 "Towards a Science of Scaling Agent Systems" (2025): 41-86% aggregate failure rates.
+ProtocolBench reports success rates only (not per MAST category). Use that as the
+comparison point - we add failure category breakdown that ProtocolBench lacks.
 
 ## Parameters You Can Modify in train.py
 - PROTOCOL: "native" | "mcp" | "a2a"
