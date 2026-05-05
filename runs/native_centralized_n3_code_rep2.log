@@ -1,0 +1,18 @@
+!! gpt-4.1-mini still RPM-limited after retries, trying next
+!! RPD-banning gpt-4o, trying next fallback
+!! RPD-banning gpt-4.1, trying next fallback
+!! gpt-4.1-mini still RPM-limited after retries, trying next
+!! RPD-banning gpt-4.1-mini, trying next fallback
+Trial 1/5 done in 78.0s success=True fc1=0 fc2=0 fc3=0 ids=[]
+!! gpt-4o-mini still RPM-limited after retries, trying next
+!! RPD-banning gpt-4.1-nano, trying next fallback
+!! RPD-banning gpt-3.5-turbo, trying next fallback
+Trial 2/5 done in 46.4s success=False fc1=0 fc2=1 fc3=0 ids=['CRASH']
+!! gpt-4o-mini still RPM-limited after retries, trying next
+Trial 3/5 done in 21.1s success=False fc1=0 fc2=1 fc3=0 ids=['CRASH']
+!! RPD-banning gpt-4o-mini, trying next fallback
+Trial 4/5 done in 21.2s success=False fc1=0 fc2=1 fc3=0 ids=['CRASH']
+Trial 5/5 done in 0.0s success=False fc1=0 fc2=1 fc3=0 ids=['CRASH']
+result: FC2_rate=0.800 FC1_rate=0.000 FC3_rate=0.000 total_failures=8 avg_time=33.4s protocol=native topology=centralized n_agents=3 task=code
+
+--- STDERR ---
