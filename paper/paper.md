@@ -146,15 +146,24 @@ versus chain at 0.43.
 ## 4. Discussion
 
 **Hypothesis verdict.** The hypothesis that *A2A + centralized minimizes FC2*
-is supported descriptively: a2a x centralized achieves FC2 = 0.00 with zero
-variance over 10 replicated trials, the only cell to do so. After
-replication, *topology* has a statistically significant main effect on FC2
-(p = 0.030), driven by chain being a poor topology (FC2 = 0.43) compared
-to centralized (FC2 = 0.13). The *protocol* main effect is not significant
-once both replicates are pooled (p = 0.38), so the FC2 = 0.00 result for
-a2a x centralized is best read as: *centralized is the load-bearing axis,
-and A2A's structured envelope helps marginally on top.* The interaction
-term is small and not significant.
+is supported descriptively: a2a x centralized has the lowest mean FC2 at
+T = 0.7 (0.07 over 15 trials). After replication, *topology* has a
+statistically significant main effect on FC2 (p = 0.014) at T = 0.7,
+driven by chain being a poor topology (FC2 = 0.50) compared to centralized
+(FC2 = 0.16). The *protocol* main effect is not significant once
+replicates are pooled (p = 0.42).
+
+**But the temperature ablation reframes the result.** When we re-ran 4
+cells at T = 0.0, FC2 collapsed to zero across all of them. This implies
+that the apparent topology effect at T = 0.7 is largely a
+sampling-variance-amplification phenomenon: chain and fully-connected
+topologies pass single-stage sampling noise into downstream stages, while
+centralized topologies have a single coordinator who can absorb that
+noise. Practitioners chasing low FC2 should therefore (a) keep agents in
+a centralized topology if temperature must be > 0 (e.g.\ for diversity
+of generations), and (b) use T = 0 if they can. The choice of protocol
+(native / MCP / A2A) does not appear to matter for FC2 once temperature
+and topology are accounted for.
 
 **Why does MCP underperform native?** A natural prediction is that MCP's
 JSON-RPC envelope and tool registry should reduce ambiguity. Instead in the
@@ -229,12 +238,16 @@ a non-rate-limited account is the obvious next step.
 ## 5. Conclusion
 
 In a controlled 3x3 factorial study of communication protocol crossed with
-organizational topology, holding agent count and task type fixed, the
-A2A + centralized cell achieves zero FC2 failures over 5 trials,
-substantially below the worst cell (FC2 = 0.80). Both protocol and
-topology have main effects on FC2 that trend significant; the interaction
-is small. The clearest practitioner-relevant finding is that the
-prompt-level overhead of MCP-style envelopes does *not* automatically
-translate into reduced inter-agent misalignment, and may in fact degrade
-chain topologies. We release the harness, results, and per-trial JSON
-under `runs/*.json` for replication.
+organizational topology, holding agent count and task type fixed at
+T = 0.7, topology has a statistically significant main effect on FC2
+(F(2,102) = 4.44, p = 0.014) but protocol does not. A targeted temperature
+ablation reveals that FC2 collapses to zero across all four measured cells
+at T = 0.0, indicating that most of the variation we measured at T = 0.7
+is sampling-variance amplified by topology rather than a structural
+coordination property. FC1 (specification) and FC3 (verification) are
+*not* sensitive to either protocol or topology, giving a clean dissociation
+across the three MAST coarse categories. Practical recommendation: prefer
+centralized topology and T = 0 worker decoding for low FC2; do not
+expect MCP-style envelope ceremony to help. We release the harness,
+results, per-trial JSON under `runs/*.json`, the analysis script, and the
+figures for replication.
