@@ -1,0 +1,8 @@
+Trial 1/5 done in 53.9s success=True fc1=0 fc2=0 fc3=0 ids=[]
+Trial 2/5 done in 66.7s success=True fc1=0 fc2=1 fc3=0 ids=['2.4']
+Trial 3/5 done in 47.1s success=True fc1=0 fc2=1 fc3=0 ids=['2.3']
+Trial 4/5 done in 68.8s success=True fc1=0 fc2=0 fc3=0 ids=[]
+Trial 5/5 done in 69.1s success=True fc1=0 fc2=0 fc3=1 ids=['3.2']
+result: FC2_rate=0.400 FC1_rate=0.000 FC3_rate=0.200 total_failures=3 avg_time=61.1s protocol=a2a topology=chain n_agents=3 task=code
+
+--- STDERR ---
