@@ -113,6 +113,12 @@ After every commit, push to GitHub:
 
 ## Rules
 - Each run under 10 minutes. If it hangs, kill it and move on.
-- Commit every completed sweep: git add results.tsv paper/ figures/ && git commit -m "exp1: sweep complete FC2_best={value}"
+- After EVERY experiment, without exception:
+    git add -A
+    git commit -m "exp: [config] -> FC2=[value]"
+    git push origin master
 - Never stop. Minimum 45 experiments.
 - Update ~/experiment_updates.md every 5 experiments.
+- If git push fails because no remote exists, run this first:
+    gh repo create ds9_code/protocol-topology-mast --private --source=. --remote=origin --push
+  Then continue pushing after every experiment.
