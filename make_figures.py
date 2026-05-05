@@ -1,5 +1,6 @@
-"""Generate figures from results.tsv. Run after each sweep."""
-import os, sys, json, argparse
+"""Generate figures from runs/*.json (trial-level). Sweep 1 figures filter to
+T=0.7 cells (excludes filenames containing _temp0); crashes count as FC2=1."""
+import os, sys, json, argparse, glob
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -10,16 +11,35 @@ PROTOCOLS = ["native", "mcp", "a2a"]
 TOPOLOGIES = ["centralized", "chain", "fully_connected"]
 
 def load(path="results.tsv"):
+    """Cell-level summary (kept for sweeps 4/5 that need a row per cell)."""
     return pd.read_csv(path, sep="\t")
 
+def load_trials(include_temp0=False):
+    """Trial-level loader matching analyze.py. Crashes get fc2=1 (counted as failures)."""
+    rows = []
+    for path in sorted(glob.glob("runs/*.json")):
+        if not include_temp0 and "_temp0" in os.path.basename(path):
+            continue
+        with open(path) as f: d = json.load(f)
+        cfg = d["config"]
+        for t in d["trials"]:
+            rows.append({
+                "protocol": cfg["protocol"], "topology": cfg["topology"],
+                "n_agents": cfg["n_agents"], "task_type": cfg["task_type"],
+                "fc1": t["fc1"], "fc2": t["fc2"], "fc3": t["fc3"],
+                "success": t["success"],
+                "source": os.path.basename(path),
+            })
+    return pd.DataFrame(rows)
+
 def fig1_heatmap(df, out="figures/fig1_fc2_heatmap.png", task_type="code", n_agents=3):
-    sub = df[(df.task_type==task_type) & (df.n_agents==n_agents) & (df.status=="ok")]
+    sub = df[(df.task_type==task_type) & (df.n_agents==n_agents)]
     grid = np.full((len(PROTOCOLS), len(TOPOLOGIES)), np.nan)
     for i, p in enumerate(PROTOCOLS):
         for j, t in enumerate(TOPOLOGIES):
             r = sub[(sub.protocol==p) & (sub.topology==t)]
             if len(r):
-                grid[i, j] = r.fc2_rate.mean()
+                grid[i, j] = r.fc2.mean()
     fig, ax = plt.subplots(figsize=(6.5, 4.5))
     im = ax.imshow(grid, cmap="RdYlGn_r", aspect="auto", vmin=0)
     ax.set_xticks(range(len(TOPOLOGIES))); ax.set_xticklabels(TOPOLOGIES)
@@ -40,15 +60,15 @@ def fig1_heatmap(df, out="figures/fig1_fc2_heatmap.png", task_type="code", n_age
 
 def fig2_failure_breakdown(df, out="figures/fig2_failure_breakdown.png",
                            task_type="code", n_agents=3):
-    sub = df[(df.task_type==task_type) & (df.n_agents==n_agents) & (df.status=="ok")]
+    sub = df[(df.task_type==task_type) & (df.n_agents==n_agents)]
     rows = []
     for p in PROTOCOLS:
         r = sub[sub.protocol==p]
         rows.append({
             "protocol": p,
-            "FC1": r.fc1_rate.mean() if len(r) else 0,
-            "FC2": r.fc2_rate.mean() if len(r) else 0,
-            "FC3": r.fc3_rate.mean() if len(r) else 0,
+            "FC1": r.fc1.mean() if len(r) else 0,
+            "FC2": r.fc2.mean() if len(r) else 0,
+            "FC3": r.fc3.mean() if len(r) else 0,
         })
     fig, ax = plt.subplots(figsize=(6.5, 4.5))
     x = np.arange(len(rows))
@@ -69,13 +89,13 @@ def fig2_failure_breakdown(df, out="figures/fig2_failure_breakdown.png",
 
 def fig3_interaction(df, out="figures/fig3_interaction.png",
                      task_type="code", n_agents=3):
-    sub = df[(df.task_type==task_type) & (df.n_agents==n_agents) & (df.status=="ok")]
+    sub = df[(df.task_type==task_type) & (df.n_agents==n_agents)]
     fig, ax = plt.subplots(figsize=(6.5, 4.5))
     for p in PROTOCOLS:
         ys = []
         for t in TOPOLOGIES:
             r = sub[(sub.protocol==p) & (sub.topology==t)]
-            ys.append(r.fc2_rate.mean() if len(r) else np.nan)
+            ys.append(r.fc2.mean() if len(r) else np.nan)
         ax.plot(TOPOLOGIES, ys, marker="o", label=p, linewidth=2)
     ax.set_xlabel("Topology"); ax.set_ylabel("FC2 rate")
     ax.set_title(f"Protocol x Topology interaction — {task_type}, N={n_agents}")
@@ -127,10 +147,13 @@ def main():
     ap.add_argument("--n_agents", type=int, default=3)
     args = ap.parse_args()
     os.makedirs("figures", exist_ok=True)
+    # Sweep 1 figures: trial-level, T=0.7 only (excludes _temp0).
+    trials = load_trials(include_temp0=False)
+    # Sweeps 4-5 (n-scaling, task-generality): cell-level, includes whatever rows exist.
     df = load()
-    if "1" in args.which: fig1_heatmap(df, task_type=args.task_type, n_agents=args.n_agents)
-    if "2" in args.which: fig2_failure_breakdown(df, task_type=args.task_type, n_agents=args.n_agents)
-    if "3" in args.which: fig3_interaction(df, task_type=args.task_type, n_agents=args.n_agents)
+    if "1" in args.which: fig1_heatmap(trials, task_type=args.task_type, n_agents=args.n_agents)
+    if "2" in args.which: fig2_failure_breakdown(trials, task_type=args.task_type, n_agents=args.n_agents)
+    if "3" in args.which: fig3_interaction(trials, task_type=args.task_type, n_agents=args.n_agents)
     if "4" in args.which: fig4_n_scaling(df, task_type=args.task_type)
     if "5" in args.which: fig5_task_generalization(df)
 
