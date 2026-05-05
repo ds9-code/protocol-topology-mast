@@ -13,7 +13,7 @@ communication protocol versus organizational topology.
 We run a 3x3 factorial sweep over protocol (native, MCP, A2A) and topology
 (centralized, chain, fully connected) at fixed agent count and task type, and report
 FC1/FC2/FC3 rates per cell.
-**Primary result (live update):** the best protocol x topology cell (native x fully_connected) achieves FC2 = 0.20, versus 0.80 for the worst cell (4.00x reduction).
+**Primary result (live update):** the best protocol x topology cell (a2a x centralized) achieves FC2 = 0.00, versus 0.80 for the worst cell (infx reduction).
 versus RESULT for the worst cell (RESULTx reduction).
 Hypothesis under test: A2A + centralized minimizes FC2 specifically.
 
@@ -49,7 +49,7 @@ failure rate per cell.
 | mcp | centralized | 0.40 | 0.40 | 0.20 | 5 | 72.1 |
 | mcp | chain | 0.20 | 0.80 | 0.40 | 9 | 46.6 |
 | mcp | fully_connected | 0.00 | 0.60 | 0.00 | 6 | 55.2 |
-| a2a | centralized | RESULT | RESULT | RESULT | RESULT | RESULT |
+| a2a | centralized | 0.00 | 0.00 | 0.40 | 2 | 68.4 |
 | a2a | chain | RESULT | RESULT | RESULT | RESULT | RESULT |
 | a2a | fully_connected | RESULT | RESULT | RESULT | RESULT | RESULT |
 <!-- END-SWEEP1-TABLE -->
