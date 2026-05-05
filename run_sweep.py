@@ -34,6 +34,10 @@ def run_one(protocol, topology, n_agents, task_type, n_trials=5, timeout_s=1200)
         "RUN_OUT_DIR": RUN_DIR,
     })
     cell_id = f"{protocol}_{topology}_n{n_agents}_{task_type}"
+    # Allow distinguishing replicate runs via SUFFIX env (so we don't overwrite the JSON)
+    suffix = os.environ.get("CELL_SUFFIX", "")
+    if suffix:
+        cell_id = f"{cell_id}_{suffix}"
     log_path = os.path.join(RUN_DIR, f"{cell_id}.log")
     t0 = time.time()
     status = "ok"

@@ -270,6 +270,8 @@ def main():
     out_dir = os.environ.get("RUN_OUT_DIR", "runs")
     os.makedirs(out_dir, exist_ok=True)
     cell_id = f"{PROTOCOL}_{TOPOLOGY}_n{N_AGENTS}_{TASK_TYPE}"
+    suffix = os.environ.get("CELL_SUFFIX", "")
+    if suffix: cell_id = f"{cell_id}_{suffix}"
     with open(os.path.join(out_dir, f"{cell_id}.json"), "w") as f:
         json.dump({
             "config": {"protocol": PROTOCOL, "topology": TOPOLOGY,
