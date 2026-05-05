@@ -1,0 +1,83 @@
+{
+  "config": {
+    "protocol": "mcp",
+    "topology": "centralized",
+    "n_agents": 3,
+    "task_type": "code",
+    "n_trials": 5,
+    "model": "gpt-4.1-mini",
+    "annot_model": "gpt-3.5-turbo"
+  },
+  "summary": {
+    "fc1_rate": 0.2,
+    "fc2_rate": 0.4,
+    "fc3_rate": 0.2,
+    "total_failures": 5,
+    "avg_time": 74.48755712509156,
+    "crash_total": 1
+  },
+  "trials": [
+    {
+      "i": 0,
+      "task": "Write a Python function that finds all prime numbers up to N",
+      "elapsed": 35.88076043128967,
+      "success": true,
+      "fc1": 0,
+      "fc2": 1,
+      "fc3": 0,
+      "ids": [
+        "2.1"
+      ],
+      "err": null
+    },
+    {
+      "i": 1,
+      "task": "Write a function that merges two sorted lists into one sorte",
+      "elapsed": 57.22529339790344,
+      "success": true,
+      "fc1": 0,
+      "fc2": 0,
+      "fc3": 0,
+      "ids": [],
+      "err": null
+    },
+    {
+      "i": 2,
+      "task": "Write a function that detects cycles in a linked list.",
+      "elapsed": 93.12523674964905,
+      "success": true,
+      "fc1": 0,
+      "fc2": 0,
+      "fc3": 0,
+      "ids": [],
+      "err": null
+    },
+    {
+      "i": 3,
+      "task": "Write a Python function that finds all prime numbers up to N",
+      "elapsed": 96.66853427886963,
+      "success": true,
+      "fc1": 1,
+      "fc2": 0,
+      "fc3": 1,
+      "ids": [
+        "1.5",
+        "3.1"
+      ],
+      "err": null
+    },
+    {
+      "i": 4,
+      "task": "Write a function that merges two sorted lists into one sorte",
+      "elapsed": 89.53796076774597,
+      "success": false,
+      "fc1": 0,
+      "fc2": 1,
+      "fc3": 0,
+      "ids": [
+        "CRASH"
+      ],
+      "err": "Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-3.5-turbo in organization org-nk7zhzom2pOXZ4RL6JKJvTd1 on requests per min (RPM): Limit 3, Used 3, Requested 1. Please try again in 20s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing.', 'type': 'requests', 'param': None, 'code': 'rate_limit_exceeded'}}"
+    }
+  ]
+}
