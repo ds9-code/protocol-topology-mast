@@ -43,11 +43,11 @@ failure rate per cell.
 <!-- BEGIN-SWEEP1-TABLE -->
 | Protocol | Topology | FC1 | FC2 | FC3 | Total fail | Avg time (s) |
 |----------|----------|-----|-----|-----|------------|--------------|
-| native | centralized | 0.60 | 0.60 | 0.60 | 9 | 77.2 |
-| native | chain | 0.20 | 0.00 | 0.40 | 3 | 58.6 |
-| native | fully_connected | 0.20 | 0.00 | 0.20 | 2 | 82.9 |
-| mcp | centralized | 0.60 | 0.20 | 0.60 | 7 | 75.8 |
-| mcp | chain | 0.00 | 0.60 | 0.60 | 8 | 50.7 |
+| native | centralized | 0.20 | 0.40 | 0.00 | 3 | 81.3 |
+| native | chain | RESULT | RESULT | RESULT | RESULT | RESULT |
+| native | fully_connected | RESULT | RESULT | RESULT | RESULT | RESULT |
+| mcp | centralized | RESULT | RESULT | RESULT | RESULT | RESULT |
+| mcp | chain | RESULT | RESULT | RESULT | RESULT | RESULT |
 | mcp | fully_connected | RESULT | RESULT | RESULT | RESULT | RESULT |
 | a2a | centralized | RESULT | RESULT | RESULT | RESULT | RESULT |
 | a2a | chain | RESULT | RESULT | RESULT | RESULT | RESULT |
