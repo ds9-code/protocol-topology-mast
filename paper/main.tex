@@ -1,18 +1,32 @@
-\documentclass[11pt]{article}
-\usepackage[margin=1in]{geometry}
+\documentclass{article}
+
+\usepackage{icml2026}
+\usepackage{microtype}
 \usepackage{graphicx}
 \usepackage{booktabs}
-\usepackage{hyperref}
 \usepackage{amsmath,amssymb}
+\usepackage{hyperref}
+\usepackage{natbib}
 
-\title{Protocol $\times$ Topology $\times$ MAST: \\
-  How Communication Structure Shapes Multi-Agent Failure Modes}
-\author{Anonymous\\
-  Submission to FAGEN @ ICML 2026}
-\date{}
+\icmltitlerunning{Protocol $\times$ Topology $\times$ MAST}
 
 \begin{document}
-\maketitle
+
+\twocolumn[
+\icmltitle{Protocol $\times$ Topology $\times$ MAST: \\
+  How Communication Structure Shapes Multi-Agent Failure Modes}
+
+\begin{icmlauthorlist}
+\icmlauthor{Anonymous}{anon}
+\end{icmlauthorlist}
+
+\icmlaffiliation{anon}{Anonymous Submission}
+\icmlcorrespondingauthor{Anonymous}{anonymous@example.com}
+\icmlkeywords{multi-agent systems, LLM agents, failure modes, MAST, communication protocols}
+\vskip 0.3in
+]
+
+\printAffiliationsAndNotice{}
 
 \begin{abstract}
 Multi-agent LLM systems fail in characteristic ways captured by the MAST
@@ -45,7 +59,7 @@ yielding a clean dissociation across the three MAST coarse categories.
 \input{sections/experiments}
 \input{sections/conclusion}
 
-\bibliographystyle{plain}
+\bibliographystyle{icml2026}
 \bibliography{references}
 
 \end{document}

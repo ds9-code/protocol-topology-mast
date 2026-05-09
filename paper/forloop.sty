@@ -1,0 +1,19 @@
+% forloop.sty - reimplementation matching original forloop semantics
+% Syntax: \forloop[<step>]{<counter>}{<init>}{<condition>}{<body>}
+% Loops with counter starting at <init>, stepping by <step> (default 1),
+% executing <body> while <condition> is true (uses \ifthenelse).
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{forloop}[2007/01/19 LaTeX package: forloop loop construct]
+\RequirePackage{ifthen}
+\newcommand{\@floop}[4][1]{%
+  \ifthenelse{#3}{%
+    #4%
+    \addtocounter{#2}{#1}%
+    \@floop[#1]{#2}{#3}{#4}%
+  }{}%
+}
+\newcommand{\forloop}[5][1]{%
+  \setcounter{#2}{#3}%
+  \@floop[#1]{#2}{#4}{#5}%
+}
+\endinput
